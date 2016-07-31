@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>双向绑定</title>
+	<script src = "../js/angular.min.js"></script>
+</head>
+<!-- 声明angular管理边界 -->
+<body ng-app = "app">
+    <!-- 声明controller管理边界 -->
+    <div ng-controller = "MyTask">
+        <input type="text" ng-model = "msg">
+    	<h3>{{msg}}</h3>
+    </div>
+	<script>
+		angular.module('app',[])
+		/*每一个controller都是一个简单的最小化的MVC*/
+		// MyTask是control，$scope是model，把model绑定到view上，div是view
+		// 可以由多个controller来定义多个任务
+		.controller('MyTask',function($scope){
+			$scope.msg = "angular";
+		})
+	</script>
+</body>
+</html>

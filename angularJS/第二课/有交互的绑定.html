@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>app</title>
+    <link rel="stylesheet" href="foundation.min.css">
+    <script src="../js/angular.min.js"></script>
+</head>
+
+<body ng-app="app">
+    <div ng-controller="firstCtrl">
+        <input type="text" ng-model="user.name">
+        <input type="text" ng-model="user.pwd">
+        <div class="button" ng-click="login()">登录</div>
+        <h1>{{test()}}</h1>
+        <!-- 或者可以用ng-if -->
+        <div ng-show = "errormsg.length > 0" class="alert-box">{{errormsg}}</div>
+    </div>
+    <script>
+    angular.module('app', [])
+        .controller('firstCtrl', function($scope) {
+        	$scope.errormsg = "";
+            $scope.user = {
+                name: '',
+                pwd: ''
+            };
+            $scope.test = function(){
+                return $scope.user.name.split('').reverse().join('');
+            }
+            $scope.login = function() {
+                if($scope.user.name == 'admin' && $scope.user.pwd == '123'){
+                	$scope.errormsg = '';
+                	alert('登录成功')
+                } else {
+                	$scope.errormsg = '用户名或密码错误';
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

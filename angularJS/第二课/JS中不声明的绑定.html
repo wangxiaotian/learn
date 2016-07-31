@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test</title>
+	<script src = "../js/angular.min.js"></script>
+	<link rel="stylesheet" href="foundation.min.css">
+</head>
+<!-- 注意在JS中不声明时，管理边界不要有名称 -->
+<body ng-app = "">
+    <!-- 如此看来，不仅仅是个JS文件，真的是融合了DOM的框架 -->
+	<input type="text" ng-model = "msg">
+	<h1 ng-clock class = "ng-clock">{{msg}}</h1>
+	<div>用户名：{{msg}}</div>
+	<!-- 另外一种写法 -->
+	<div ng-bind = "'密码：' + msg"></div>
+	<div class = "{{msg}}">{{msg}}</div>
+</body>
+</html>

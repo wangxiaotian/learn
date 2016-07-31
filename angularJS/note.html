@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>note</title>
+	<style>
+		.space{
+			padding-top:10px;
+		}
+	</style>
+</head>
+<body>
+    <h4>全局</h4>
+	<ul>
+		<li>html中要声明管理边界及名称</li>
+		<li>DOM中绑定的变量是与JS中的变量相对应的</li>
+	</ul>
+	<h4>积累</h4>
+	<li class = "space">ng-controller = "TaskCtrl" , 绑定在BODY中，用于声明</li>
+	<li class = "space">ng-if = "tasks.length>0" , 当数组长度大于零时显示</li>
+	<li class="space">ng-hide = "tasks.length==0" , 当数组长度等于零时显示，不推荐使用，用ng-if代替。因为其不管数组长度如何，他是都先渲染，然后隐藏的，影响性能</li>
+	<li class="space">ng-show = "tasks.length>0" , 当数组长度大于零时显示</li>
+    <li class = "space">ng-model = "task" , 简单的数据绑定，此例用在input中</li>
+    <li class = "space">ng-repeat = "item in tasks track by $index" , 用于循环输出，item为输出内容，{{item}}绑定在DOM中，此例用于li</li>
+    <li class = "space">ng-click = "add()" , 绑定一个函数，是一个执行了的函数，此例用于button</li>
+    <li class="space">ng-bind = "'密码：' + msg" , 可以代替直接在DOM中输出双大括号，避免渲染时渲染大括号;<br>
+    还有一种方式：(h1) ng-clock class = "ng-clock">{{msg}} (/h1),
+    此原理为当渲染到ng-clock时，先不渲染内容，页面加载完成后移出class，在渲染内容</li>
+</body>
+</html>
