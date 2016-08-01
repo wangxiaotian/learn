@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>callback</title>
+	<script src="scripts/zepto.js"></script>
+</head>
+<body>
+	<div class="content">
+		<ul id="list">
+			<li>标题一</li>
+			<li>标题二</li>
+			<li>标题三</li>
+		</ul>
+	</div>
+	<script>
+		window.onload = function(){
+		    // 定义js发送数据
+			function sendData(string,type,callback){
+				// 调用app方法
+				HostApp.setDataInfo(string,type,callback)
+			}
+			// 调用js
+			sendData('www.baidu.com',1,function(data){
+				// 使用app返回的数据(data)
+				alert(data.toString());
+				// todo...
+			})
+		}
+	</script>
+</body>
+</html>

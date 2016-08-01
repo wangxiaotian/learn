@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>飘雪</title>
+</head>
+
+<body>
+    <h3>页面飘雪</h3>
+    <input type="submit" id="startFlutterSnow" value="天之封印">
+    <script>
+    window.onload = function() {
+        var isOpen = false;
+
+        function flutterChar(){
+            if (isOpen) {
+            return;
+        }
+        isOpen = true;
+        var allChar = [],
+                maxSnowFlake = 90,
+                maxLeft = document.getElementsByTagName('html')[0].clientWidth - 100,
+                maxTop = -1,
+                i = 0,
+                snowFlake = ['❉', '❈', '*', '✲', '❀', '❃'],
+                snowFlakeColor = ["red", "green", "#ccc123", "#345232", "#231111", "#ab2322"],
+                s = 0,
+                createCharr = function() {
+                    var d = document.createElement('div');
+                    s++;
+                    s = s > 5 ? 0 : s;
+                    d.innerHTML = snowFlake[s];
+                    d.style.left = Math.round(Math.random() * maxLeft + 0) + 'px';
+                    d.style.top = (-1 * Math.round(Math.random() * 100 + 0)) + 'px';
+                    d.style.position = 'absolute';
+                    d.style.zIndex = '999';
+                    d.style.color = snowFlakeColor[s];
+                    d.setAttribute('data-v', Math.round(Math.random() * 5 + 2));
+                    d.setAttribute('data-time', '0');
+                    document.getElementsByTagName('body')[0].appendChild(d);
+                    return d;
+                },
+                moveChar = function(e) {
+                    maxTop = document.getElementsByTagName('body')[0].scrollHeight - 50;
+                    var l = parseInt(e.style.left, 10),
+                        t = parseInt(e.style.top, 10),
+                        v = parseInt(e.getAttribute('data-v'), 10),
+                        time = parseInt(e.getAttribute('data-time'), 10),
+                        _time = time + 50,
+                        _l = l + v,
+                        _t = 0.5 * 9 * _time * _time * 0.001 * 0.001 * v,
+                        top = _t >= maxTop ? 0 : _t,
+                        _time = _t >= maxTop ? 0 : _time;
+                    e.style.top = top + 'px';
+                    e.style.left = (_l >= maxLeft ? 0 : _l) + 'px';
+                    e.setAttribute('data-time', _time);
+                }
+        var createS = setInterval(function() {
+            var length = allChar.length,
+                l = length + 10;
+            for (; i < l; i++) {
+                allChar.push(createCharr());
+            }
+            if (allChar.length > maxSnowFlake) {
+                clearInterval(createS);
+            }
+        }, 1000);
+        setInterval(function() { //雪花运动
+            var ll = allChar.length;
+            for (i = 0; i < ll; i++) {
+                moveChar(allChar[i]);
+            }
+        }, 50)
+
+        }
+
+        
+
+        document.getElementById("startFlutterSnow").onclick = function() { //页面五颜六色的雪花
+            this.value = "已开始下雪，请等待";
+            flutterChar();
+        }
+
+    }
+    </script>
+</body>
+
+</html>

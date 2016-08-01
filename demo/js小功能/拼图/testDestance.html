@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>测试距离</title>
+	<script src="jquery-1.12.2.js"></script>
+</head>
+<body>
+    jquery的width（）方法是不包括边框宽度的，js的offsetWidth包括边框宽度 
+	<div class="test1" style = "position:relative;width:500px;height:500px;border:1px solid #333;margin-top:50px;">
+		<div class="box1_1" style = "position:relative;width:200px;height:100px;top:100px;left:100px;border:1px solid #333;">
+			offsetLeft距离为：<span></span><br>
+			offsetWidth为：<span id = "offsetWidth1"></span><br />
+			Width为：<span id = "Width1"></span>
+		</div>
+		<div class="box1_2" style = "position:relative;width:240px;height:100px;top:200px;left:200px;border:1px solid #333;">
+			offsetTop距离为：<span></span><br>
+			offsetWidth为：<span id = "offsetWidth2"></span><br />
+			Width为：<span id = "Width2"></span>
+		</div>
+	</div>
+	<script>
+		$(function(){
+			var num1 = $('.box1_1')[0].offsetLeft;
+            $('.box1_1 span').text(num1);
+            $('.box1_2 span').text($('.box1_2')[0].offsetTop);
+            $('#offsetWidth1').text($('.box1_1')[0].offsetWidth);
+            $('#offsetWidth2').text($('.box1_2')[0].offsetWidth);
+            $('#Width1').text($('.box1_1').width());
+            $('#Width2').text($('.box1_2').width());
+		})
+	</script>
+</body>
+</html>

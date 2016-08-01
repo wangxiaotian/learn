@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	    <meta charset = "utf-8">
+		<title>拼图游戏</title>
+		<style type = "text/css">
+		    *{
+			    margin:            0;
+				padding:           0;
+			}
+			body{
+				text-align:        center;
+				background:        url(images/09_bg.png);
+			}
+			#box{
+				font-size:         0;
+				margin:            20px 0 10px 0;
+			}
+			#box img{
+				margin-left:       20px;
+				width:             100px;
+				height:            100px;
+                
+                border-radius:     5px;
+                cursor:            pointer;
+                opacity:           0.7;
+			}
+			#box img:hover{
+			    opacity:           1;
+			}
+			input{
+				padding:           2px 10px;
+				cursor:            pointer;				
+			}
+			#box img.current{
+				border:            2px solid yellow;
+				width:             96px;
+				height:            96px;
+				opacity:           1;
+			}
+			ul{
+				width:             800px;
+				height:            500px;
+				margin:            20px auto;
+				border:            5px solid #eee;
+				border-radius:     5px;
+			}
+			ul li{
+				list-style:        none;
+				float:             left;
+				width:             160px;
+				height:            100px;
+			}
+			ul li img{
+				width:             160px;
+				height:            100px;
+				cursor:            move;
+			}
+			ul li.active{
+				border:            1px dotted red;
+				width:             160px;
+				height:            100px;
+			}
+		</style>
+		<script src = "jquery-1.12.2.js"></script>
+		<script type = "text/javascript">
+		    window.onload = function () {
+                var oBox = document.getElementById('box');
+                var oUl = document.getElementsByTagName('ul')[0];
+                var aImg = oBox.getElementsByTagName('img');
+                var aLi = oUl.getElementsByTagName('li');
+                var oInput = document.getElementsByTagName('input')[0];
+                
+                var disX = disY = 0;
+                var aPos = [];
+                var ary = [];
+                var imgPath = 1;
+                var minIndex = 2;
+               
+                for(var i = 0; i < 25; i++) {
+                	ary.push(i+1);
+                }
+                for(var i = 0; i < aImg.length; i++) {
+                	aImg[i].index = i;
+                	aImg[i].onclick = function () {
+                		for(var i = 0; i < aImg.length; i++) {
+                			aImg[i].className = "";
+                		}
+                		imgPath = this.index + 1;
+                		ary.sort(function(a,b){
+                			return a - b;
+                		})
+                		oUl.innerHTML = "";
+                		oUl.style.background = "";
+                		oUl.style.background = "url(images/09_" + imgPath + ".gif";
+                        oInput.value = "开始游戏";
+                		this.className = "current";
+                        first();
+                	}
+                }
+                oInput.onclick = function () {
+                	ary.sort(function(a,b){
+                        return Math.random() > 0.5 ? -1 : 1;
+                	})
+                	oUl.style.background = "url(images/09_" + imgPath + ".gif";
+                	oUl.innerHTML = "";
+                	this.value = "重新开始";
+                    
+                	first()
+
+                }
+
+                //插入结构
+                function first(){
+                for(var i = 0; i < ary.length; i++) {
+                	var Img = document.createElement('img');
+
+                	Img.src = "images/img/" + "09_" + imgPath + "_" + ary[i] + ".gif";
+                    var Li = document.createElement('li');
+                    Li.appendChild(Img);
+                    var oFragment = document.createDocumentFragment();
+                    oFragment.appendChild(Li);
+                    oUl.appendChild(oFragment);
+                }
+                //布局转换
+                
+
+                for(var i = 0; i < aLi.length; i++) {
+                    aPos.push({"left":aLi[i].offsetLeft,"top":aLi[i].offsetTop});
+                    
+                }
+                for(var i =0; i < aLi.length; i++) {
+                	aLi[i].index = i;
+                	aLi[i].style.position = "absolute";
+                	aLi[i].style.top = aPos[i].top + "px";
+                	aLi[i].style.left = aPos[i].left + "px";
+                	if(oInput.value == "重新开始"){
+                		setDrag(aLi[i]);
+                	}
+                }
+                
+            }
+            first();
+                
+                //拖曳函数
+                function setDrag(obj) {
+                	obj.onmousedown = function (event) {
+
+                		obj.style.zIndex = minIndex++;
+                		disX = event.clientX - obj.offsetLeft;
+                		disY = event.clientY - obj.offsetTop;
+                		if(this.setCapture) {
+                			obj.onmousemove = move;
+                			obj.onmouseup = up;
+                			this.setCapture();
+
+                		}else{
+                		
+                			document.onmousemove = move;
+                			document.onmouseup = up;
+                			
+                		}
+                	}
+                	return false;
+                	function move (event) {
+                		s = true;
+                		obj.style.left = event.clientX - disX + "px";
+                		obj.style.top = event.clientY - disY + "px";
+                
+                		for(var i = 0; i < aLi.length; i++) {
+                			aLi[i].className = "";
+                			aLi[i].style.opacity = 1;
+                		}
+                		var oNearest = findNearest(obj); //此处for循环放到声明下面，oNearest变为了null
+                		if(oNearest){
+                	        oNearest.className = "active";
+                	        oNearest.style.opacity = "0.5";
+                	    }
+                	}
+                	function up (event) {
+                		
+                       
+                		this.onmousemove = null;
+                		this.onmouseup = null;
+                		var oNearest = findNearest(obj);
+                		if(obj.releaseCapture) {
+                			obj.releaseCapture()
+                		}
+                        if(oNearest){
+                        	oNearest.className = "";
+                        	oNearest.style.opacity = 1;
+                        	oNearest.style.zIndex = minIndex++;
+                        	obj.style.zIndex = minIndex++;
+                        	$(obj).animate({top:aPos[oNearest.index].top + "px",left:aPos[oNearest.index].left + "px"},300);
+                            
+                            $(oNearest).animate({top:aPos[obj.index].top + "px",left:aPos[obj.index].left + "px"},300)
+                            
+                            var temp = obj.index;
+                            obj.index = oNearest.index;
+                            oNearest.index = temp;
+                            
+                        }else{
+                            obj.style.top = aPos[obj.index].top + "px";
+                            obj.style.left = aPos[obj.index].left + "px";
+                        }
+
+                	}
+                }
+                //找到最新的碰撞物体
+                function findNearest(obj) {
+                	var Index = -1;
+                	var iMinDistance = Number.MAX_VALUE;
+                	for(var i = 0; i < aLi.length; i++) {
+                		if(obj == aLi[i]) {
+                			continue;
+                		}
+                		if(cdTest(obj,aLi[i])) {
+                            var dis = getDistance(obj,aLi[i]);
+                            if(dis < iMinDistance) {
+                            	iMinDistance = dis;
+                            	Index = i;
+                            }
+
+                		}
+                	}
+                	if(Index == -1){
+                		return null
+                	}else{
+                		return aLi[Index];
+                	}
+                }
+                //物体碰撞检测
+                function cdTest(o1,o2) {
+                	var l1 = o1.offsetLeft,
+                	    r1 = l1 + o1.offsetWidth,
+                	    t1 = o1.offsetTop,
+                	    b1 = t1 + o1.offsetHeight;
+                	var l2 = o2.offsetLeft,
+                	    r2 = o2 + o2.offsetWidth,
+                	    t2 = o2.offsetTop,
+                	    b2 = o2 + o2.offsetHeight;
+                	if(r1 < l2 || b1 < t2 || l1 > r2 || t1 > b2) {
+                		return false;
+                	}else{
+                		return true;
+                	}
+                }
+                function getDistance(o1,o2) {
+                	var a = (o1.offsetLeft + o1.offsetWidth/2) - (o2.offsetLeft + o2.offsetWidth/2);
+                	var b = (o1.offsetTop + o1.offsetHeight/2) - (o2.offsetTop + o2.offsetHeight/2);
+                	return Math.sqrt(a*a + b*b);
+                }
+
+		    }
+		    
+		</script>
+	</head>
+	<body>
+	    <div id = "box">
+	        <img src = "images/09_1.jpg" class = "current">
+	        <img src = "images/09_2.jpg">
+	        <img src = "images/09_3.jpg">
+	    </div>
+	    <input type = "submit" value = "开始游戏"><br>
+	    <ul></ul>
+	</body>
+</html>

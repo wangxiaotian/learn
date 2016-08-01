@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>简单的四舍五入</title>
+</head>
+<body>
+    <input type="submit" value = "点击">
+	<div id="box1"></div>
+	<div id="box2"></div>
+	<script>
+		window.onload = function(){
+			var oDiv1 = document.getElementById('box1');
+			var oDiv2 = document.getElementById('box2');
+			var oInput = document.getElementsByTagName('input')[0];
+			// Number的方法，toFixed(),将小数四舍五入为指定位数
+			oInput.onclick = function(){
+				var num = Math.random();
+				oDiv1.innerHTML = num;
+				num = num.toFixed(3);
+				oDiv2.innerHTML = num;
+			}
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>倒计时</title>
+    <style>
+    a {
+        display: inline-block;
+        text-align: center;
+        padding: 10px 10px;
+        background: #0780fa;
+        color: white;
+        border: none;
+        margin-right: 20px;
+        text-decoration: none;
+        width: 150px;
+    }
+    
+    a:hover {
+        border: 4px solid #54a5f7;
+        padding: 6px 6px;
+        opacity: 0.8;
+    }
+    
+    div.btn-send {
+        margin: 20px auto;
+        width: 220px;
+    }
+    </style>
+    <script src="jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="btn-send">
+        <a href="javascript:;">发送验证码</a>
+    </div>
+    <script>
+    $(function() {
+        function jishi(option) {
+            var obj = $(option).find('a');
+            var time;
+            var s = true;
+            obj.click(function() {
+                if (s) {
+                    obj.html('发送验证码<span class = "hidden">&nbsp;&nbsp;(&nbsp;<span class = "time">10秒</span>&nbsp;)</span>');
+                } else {
+                    return false;
+                }
+                timer = setInterval(updateTime, 1000)
+
+                function updateTime() {
+                    s = false;
+                    time = parseInt($('.time').text());
+                    time--;
+                    if (time <= 0) {
+                        clearInterval(timer);
+                        $('span.hidden').hide();
+                        s = true;
+                    }
+                    if(time<10){
+                        $('.time').html('0' + time + '秒');
+                    } else {
+                        $('.time').html(time + '秒');
+                    }
+                    
+                }
+            })
+
+        }
+        jishi('.btn-send');
+    })
+    </script>
+</body>
+
+</html>

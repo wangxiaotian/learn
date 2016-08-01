@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>测试距离</title>
+	<script src="jquery-1.12.2.js"></script>
+	<style>
+	</style>
+</head>
+<body>
+    1.jquery的width（）方法是不包括边框宽度的，js的offsetWidth包括边框宽度 
+    <div id="client"></div>
+	<div class="test1" style = "position:relative;width:500px;height:500px;border:1px solid #333;margin-top:50px;">
+		<div class="box1_1" style = "position:relative;width:200px;height:100px;top:100px;left:100px;border:1px solid #333;">
+			offsetLeft距离为：<span></span><br>
+			offsetWidth为：<span id = "offsetWidth1"></span><br />
+			Width为：<span id = "Width1"></span>
+		</div>
+		<div class="box1_2" style = "position:relative;width:240px;height:100px;top:200px;left:200px;border:1px solid #333;">
+			offsetTop距离为：<span></span><br>
+			offsetWidth为：<span id = "offsetWidth2"></span><br />
+			Width为：<span id = "Width2"></span>
+		</div>
+	</div>
+	<div class="content2"></div>
+	<div class="test2" style = "border:10px solid #ccc;width:200px;height:200px;overflow-y:scroll;margin-top:20px;position:relative;top:10px;left:10px;">
+		测试内容<br/>测试内容<br/>测试内容<br/>测试内容<br/>测试内容<br/>测试内容<br/>测试内容<br/>测试内容<br/>测试内容<br/>测试内容<br/>测试内容<br/>测试内容<br/>测试内容<br/>测试内容<br/>测试内容<br/>测试内容<br/>测试内容<br/>测试内容<br/>
+	</div>
+	<script>
+		$(function(){
+			var num1 = $('.box1_1')[0].offsetLeft;
+            $('.box1_1 span').text(num1);
+            $('.box1_2 span').text($('.box1_2')[0].offsetTop);
+            $('#offsetWidth1').text($('.box1_1')[0].offsetWidth);
+            $('#offsetWidth2').text($('.box1_2')[0].offsetWidth);
+            $('#Width1').text($('.box1_1').width());
+            $('#Width2').text($('.box1_2').width());
+            var width1 = document.body.clientWidth;
+            var width2 = document.documentElement.clientWidth;
+
+            $('#client').html('2.document.body.clientWidth的值为：' + width1 + '<br/>document.documentElement.clientWidth的值为：' + width2 + '<br/>第一个为body的宽度，第二个为html的宽度，body默认有8px的外边距，去掉默认后即相等');
+
+            $('.content2').html('scrollHeight的值为：' + $('.test2')[0].scrollHeight + '<br/>clientHeight的值为：' + $('.test2')[0].clientHeight + '<br/>top值是否有单位：' + $('.test2')[0].style.top + '----这里竟然是可以直接取值啊');
+		})
+	</script>
+</body>
+</html>

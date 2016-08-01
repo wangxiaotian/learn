@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>滑动门导航</title>
+	<script src = "jquery-1.12.2.js"></script>
+	<style>
+		.box{
+			width:200px;
+			cursor:pointer;
+		}
+		.door{
+			position:relative;
+		}
+		.box{
+			position:relative;
+			left:-160px;
+		}
+	</style>
+</head>
+<body>
+	<h2>滑动门导航</h2>
+	<div class="door">
+	    <div class="box"><img src="bg.png" alt="滑动门"></div>
+	</div>
+    <script>
+    	$(function(){
+    		$('.box').on('mouseover',function(){
+    			$(this).animate({left:'0px'},500);
+    			console.log('mouseover');
+    		})
+    		$('.box').on('mouseout',function(){
+    			$(this).animate({left:'-160px'},500);
+    		})
+    	})
+    </script>
+</body>
+</html>

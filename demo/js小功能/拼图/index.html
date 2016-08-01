@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>拼图</title>
+    <script src="jquery-1.12.2.js"></script>
+    <style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    body {
+        text-align: center;
+        background: url(images/09_bg.png);
+    }
+    
+    #box {
+        font-size: 0;
+        margin: 20px 0 10px 0;
+    }
+    
+    #box img {
+        margin-left: 20px;
+        width: 100px;
+        height: 100px;
+        border-radius: 5px;
+        cursor: pointer;
+        opacity: 0.7;
+    }
+    
+    #box img:hover {
+        opacity: 1;
+    }
+    
+    input {
+        padding: 2px 10px;
+        cursor: pointer;
+    }
+    
+    #box img.current {
+        border: 2px solid yellow;
+        width: 96px;
+        height: 96px;
+        opacity: 1;
+    }
+    
+    ul {
+        width: 800px;
+        height: 500px;
+        margin: 20px auto;
+        border: 5px solid #eee;
+        border-radius: 5px;
+    }
+    
+    ul li {
+        list-style: none;
+        float: left;
+        width: 160px;
+        height: 100px;
+    }
+    
+    ul li img {
+        width: 160px;
+        height: 100px;
+        cursor: move;
+    }
+    
+    ul li.active {
+        border: 1px dotted red;
+        width: 160px;
+        height: 100px;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <img src="images/09_1.jpg" alt="第一张图" class="current">
+        <img src="images/09_2.jpg" alt="第一张图">
+        <img src="images/09_3.jpg" alt="第一张图">
+    </div>
+    <input type="submit" value="开始游戏" id="btn">
+    <ul></ul>
+    <script>
+    $(function() {
+        var main = {
+            // 初始化
+            init: function() {
+                var self = this;
+                self.orderDom();
+                self.randomDom();
+                $('#box img')[0].click();
+            },
+            // 渲染
+            createDom: function(num1, arrOption) {
+                var self = this;
+                var aArry = arrOption;
+                var str = '';
+                for (var i = 0; i < aArry.length; i++) {
+                    str += '<li><img src = "images/img/09_' + num1 + '_' + aArry[i] + '.gif"></li>';
+                }
+                $('ul').html('');
+                $('ul').append(str);
+            },
+            // 顺序数
+            orderNumber: function(a, b) {
+                return a - b;
+            },
+            // 随机数
+            randomNumber: function(a, b) {
+                return Math.random() > 0.5 ? 1 : -1;
+            },
+            // 顺序DOM
+            orderDom: function() {
+                var self = this;
+                self.arr = [];
+                for (var i = 0; i < 25; i++) {
+                    self.arr.push(i + 1);
+                }
+                $('#box').on('click', 'img', function() {
+                    self.index = $(this).index() + 1;
+                    self.arr.sort(self.orderNumber);
+                    self.createDom(self.index, self.arr);
+                })
+            },
+            // 随机DOM
+            randomDom: function() {
+                var self = this;
+                $('#btn').on('click', function() {
+                    self.arr.sort(self.randomNumber);
+                    self.createDom(self.index, self.arr);
+                })
+            },
+            // 拖曳
+            setDrag: function(obj) {
+                var self = this;
+                self.minIndex = 2;
+                obj.onmousedown = function(event) {
+                    this.style.zIndex = minIndex++;
+                    // 记录鼠标按下时鼠标距离图片的位置
+                    self.dis_x = event.clientX - obj.offsetLeft;
+                    self.dis_y = event.clientY - obj.offsetTop;
+                }
+            },
+            
+        }
+        main.init();
+    })
+    </script>
+</body>
+
+</html>

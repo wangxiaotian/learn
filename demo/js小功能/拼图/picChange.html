@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>图片交换</title>
+	<script src="jquery-1.12.2.js"></script>
+	<style>
+		.content{
+			width:1060px;
+			height:340px;
+			border:1px solid #ccc;
+			margin: 100px auto;
+			font-size:0;
+			padding:0 0 20px 0;
+			position:relative;
+		}
+		img{
+			position:relative;
+			margin-left:20px;
+			margin-top:20px;
+		}
+		img:hover{
+			cursor:move;
+		}
+	</style>
+	<script>
+		$(function(){
+			var main = {
+				init : function(){
+					var self = this;
+					self.test();
+					self.picChange();
+				},
+				test : function(){
+					$('.content').on('mousedown','img',function(event){
+						var self = this;
+						var x = event.clientX;
+						var y = event.clientY;
+						$('.box span').text('鼠标坐标：x：' + x + ',y：' + y);
+					})
+				},
+				picChange : function(){
+					var self = this;
+					$('.content').on('mousedown','img',function(event){
+                        self.disX = event.clientX - $(this)[0].offsetLeft;
+                        self.disY = event.clientY - $(this)[0].offsetTop;
+                        self.move($(this)[0],event);
+
+					})
+				},
+				move : function(obj,event){
+					obj.style.left = event.clientX - self.disX + 'px';
+					obj.style.top = event.clientY - self.disY + 'px';
+				}
+			}
+			main.init();
+		})
+	</script>
+</head>
+<body>
+    <div class="box">
+    	<span></span>
+    </div>
+	<div class="content">
+		<img src="images/img/09_3_1.gif" alt="">
+		<img src="images/img/09_3_2.gif" alt="">
+		<img src="images/img/09_3_3.gif" alt="">
+		<img src="images/img/09_3_4.gif" alt="">
+		<img src="images/img/09_3_5.gif" alt="">
+		<img src="images/img/09_3_6.gif" alt="">
+		<img src="images/img/09_3_7.gif" alt="">
+		<img src="images/img/09_3_8.gif" alt="">
+	</div>
+</body>
+</html>

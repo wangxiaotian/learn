@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>本地搜索</title>
+    <style>
+    .active {
+        display: none;
+    }
+    </style>
+</head>
+
+<body>
+    <input type="text" id="search">
+    <ul class="list">
+        <li>四个牧民</li>
+        <li>三个喇嘛</li>
+        <li>两杆铁枪</li>
+        <li>一个西藏</li>
+    </ul>
+    <script src="test.js"></script>
+    <script>
+    window.onload = function() {
+        var oInput = document.getElementById('search');
+        var aLi = document.getElementsByTagName('li');
+        oInput.onkeyup = function() {
+            var str = this.value;
+            str = str.replace(/\s/g, '');
+            var reg = eval("/" + str + "/g");
+            for (var i = 0; i < aLi.length; i++) {
+                aLi[i].className = "active";
+                aLi[i].index = i;
+                var str1 = aLi[i].innerHTML;
+                if (str1.search(reg) != -1) {
+                    // 当匹配规则为空时，系统实现匹配成功，返回0
+                    aLi[i].className = "";
+                }
+
+            }
+        }
+    }
+    </script>
+</body>
+
+</html>

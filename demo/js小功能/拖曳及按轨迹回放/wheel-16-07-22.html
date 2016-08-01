@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>拖曳及按轨迹回放</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    body {
+        background: #ccc;
+        position: relative;
+        font-family: '宋体';
+    }
+    
+    .box {
+        position: absolute;
+        width: 300px;
+        height: 150px;
+        border: 2px solid #fff;
+        background: #111;
+        cursor
+    }
+    .smallBox{
+    	font-size:0.8em;
+    }
+    h4 {
+        margin: 0;
+        border-bottom: 2px solid #fff;
+        color: yellow;
+        padding: 5px 0px 5px 170px;
+        cursor: move;
+        font-weight: 100;
+        font-size:0.9em;
+    }
+    
+    h4 span {
+        cursor: pointer;
+    }
+    
+    .content {
+        color: #fff;
+        display: inline-block;
+        padding: 15px 0 0 20px;
+    }
+    
+    .content1,
+    .content2,
+    .content3 {
+        color: yellow;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+        var main = {
+            init: function() {
+                var self = this;
+                self.oBox = document.getElementsByClassName('box')[0];
+                self.oBtn = document.getElementById('btn');
+                self.oH4 = document.getElementsByTagName('h4')[0];
+                self.oBtn = self.oH4.getElementsByTagName('span')[0];
+                self.oCon1 = document.getElementsByClassName('content1')[0];
+                self.oCon2 = document.getElementsByClassName('content2')[0];
+                self.oCon3 = document.getElementsByClassName('content3')[0];
+                self.arrX = [];
+                self.arrY = [];
+                self.s1 = false;
+                self.s2 = false;
+                self.disX = 0;
+                self.disY = 0;
+                self.showX = '471px';
+                self.showY = '166px';
+                self.initStatus();
+                self.showValue();
+                self.initValue();
+                self.changingValue();
+                self.switchStatus();
+                self.playbackFunc();
+            },
+            initStatus: function() {
+            	var self = this;
+                self.oBox.style.top = self.showY
+                self.oBox.style.left = self.showX;
+                self.showValue();
+            },
+            initValue: function() {
+                var self = this;
+                self.oH4.onmousedown = function(event) {
+                    self.s1 = true;
+                    self.disX = event.clientX - self.oBox.offsetLeft;
+                    self.disY = event.clientY - self.oBox.offsetTop;
+                    self.showX = self.oBox.style.left;
+                    self.showY = self.oBox.style.top;
+                    self.showValue();
+                    console.log(self.s1);
+                    var event = event ? event : window.event;
+		    		event.stopPropagation();
+                }
+            },
+            changingValue: function() {
+                var self = this;
+                document.onmousemove = function(event) {
+                    if (!self.s1) {
+                        return false;
+                    }
+                    var wWidth = document.getElementsByTagName('body')[0].clientWidth;
+                    var wHeight = document.getElementsByTagName('body')[0].clientHeight;
+                    var left = event.clientX - self.disX;
+                    var top = event.clientY - self.disY;
+                    var arrx = self.oBox.style.left;
+                    var arry = self.oBox.style.top;
+                    console.log(self.arrX.join());
+                    self.arrX.push(arrx);
+                    self.arrY.push(arry);
+                    left = (left < 0 ? 0 : left);
+                    top = (top < 0 ? 0 : top);
+                    left = left > wWidth - 304 ? wWidth - 304 : left;
+                    self.oBox.style.left = left + 'px';
+                    self.oBox.style.top = top + 'px';
+                    self.showX = self.oBox.style.left;
+                    self.showY = self.oBox.style.top;
+                    self.showValue();
+                }
+            },
+            switchStatus: function() {
+            	var self = this;
+                document.onmouseup = function() {
+                    self.s1 = false;
+                    self.showX = self.oBox.style.left;
+                    self.showY = self.oBox.style.top;
+                    self.showValue();
+                }
+            },
+            showValue: function() {
+                var self = this;
+                self.oCon1.innerHTML = self.s1;
+                self.oCon2.innerHTML = self.showY;
+                self.oCon3.innerHTML = self.showX;
+            },
+            playbackFunc : function(){
+                var self = this;
+                self.s2 = true;
+                self.oBtn.onclick = function(){
+                	self.arrX = self.arrX.reverse();
+                    self.arrY = self.arrY.reverse();
+                	var l = self.arrX.length;
+                	var t = 0;
+                	var timer = setInterval(function(){
+                        t++;
+                        if(t >= l){
+                        	clearInterval(timer);
+                        };
+                        self.oBox.style.left = self.arrX[t];
+                        self.oBox.style.top = self.arrY[t];
+                        self.showX = self.oBox.style.left;
+                        self.showY = self.oBox.style.top;
+                        self.showValue();
+                	},100)
+                	alert('移动后出发');
+                }
+                
+            }
+        }
+        main.init();
+    }
+    </script>
+</head>
+
+<body>
+    <div class="box">
+        <h4><span id = "btn">点击回放拖动轨迹</span></h4>
+        <div class="smallBox">
+            <span class="content">Drag：</span><span class="content1"></span><br/>
+            <span class="content">offsetTop：</span><span class="content2"></span><br/>
+            <span class="content">offsetLeft：</span><span class="content3"></span><br/>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>round</title>
+</head>
+<body>
+    <h3>三位小数的四舍五入</h3>
+    <input type="submit" value = "点击操作">
+	<div id="data"></div>
+	<div id="round"></div>
+	<script>
+		window.onload = function(){
+            var oDivD = document.getElementById('data');
+            var oDivR = document.getElementById('round');
+            var oInput = document.getElementsByTagName('input')[0];
+            // 追根到底的实现是Math的方法，转换一下，逻辑有点复杂，代码却很少
+            oInput.onclick = function(){
+            	var data = Math.random();
+            	console.log(data);
+                oDivD.innerHTML = data;
+                data = data*1000;
+                data = Math.round(data)/1000;
+                oDivR.innerHTML = data;
+            }
+		}
+	</script>
+</body>
+</html>

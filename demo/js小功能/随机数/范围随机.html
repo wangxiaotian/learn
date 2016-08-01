@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>random</title>
+</head>
+<body>
+	<h3>生成100以内的随机数</h3>
+	<div id="source">25,78,62,59,83,88</div>
+	<input type="submit" value = "点击生成随机数">
+	<div id="random"></div>
+	<script>
+		window.onload = function(){
+			var oDivS = document.getElementById('source');
+			var oDivR = document.getElementById('random');
+			var oInput = document.getElementsByTagName('input')[0];
+			var str = oDivS.innerHTML;
+			var arr = new Array(6);
+			// 此方法的随机数实现是基于传入数据来上下浮动
+			function changeData(){
+				// 此处用三元操作符，在小于0.1时应该乘1000的，但却会出错，下面的if语句却可以
+				/*
+				randomNum = (Math.random() >= 0.1) ? (Math.random() * 100) : (Math.random() * 100);
+				*/
+				
+				var randomNum = Math.random();
+				if(randomNum >= 0.1){
+					console.log(randomNum);
+					randomNum *= 100;
+				} else {
+					console.log(randomNum);
+					randomNum *= 1000;
+				}
+				
+				return randomNum;
+			}
+            oInput.onclick = function(){
+            	for(var i = 0; i < arr.length; i++){
+            		arr[i] = Math.floor(changeData());
+            	}
+                oDivR.innerHTML = arr.join('   ');
+                var a = (5 > 3) ? 5 : 3;
+            }
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>random</title>
+</head>
+<body>
+	<h3>生成相近的随机数</h3>
+	<div id="source">25,78,62,59,83,88</div>
+	<input type="submit" value = "点击生成随机数">
+	<div id="random"></div>
+	<script>
+		window.onload = function(){
+			var oDivS = document.getElementById('source');
+			var oDivR = document.getElementById('random');
+			var oInput = document.getElementsByTagName('input')[0];
+			var str = oDivS.innerHTML;
+			// 此方法的随机数实现是基于传入数据来上下浮动
+			function changeData(){
+				var randomNum = 0.8 + Math.random()*0.4;
+				return randomNum;
+			}
+            oInput.onclick = function(){
+            	var arr = str.split(',');
+            	for(var i = 0; i < arr.length; i++){
+            		arr[i] = Math.floor(arr[i] * changeData());
+            	}
+                oDivR.innerHTML = arr.join();
+            }
+		}
+	</script>
+</body>
+</html>

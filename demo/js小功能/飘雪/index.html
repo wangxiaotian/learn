@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>下雪</title>
+    <style>
+    	
+    </style>
+</head>
+
+<body>
+    <h3>下雪天</h3>
+    <input type="submit" value="天之封印">
+    <div class="content"></div>
+    <br><br><br><br><br><br><br><br><br>
+    <script>
+    window.onload = function() {
+        var main = {
+            init: function() {
+                var self = this;
+                self.i = 0;
+                self.arr = [];
+                self.maxHeight = document.getElementsByTagName('html')[0].clientHeight;
+                self.maxWidth = document.getElementsByTagName('html')[0].clientWidth;
+                self.install();
+
+            },
+            // 创造雪花，赋予颜色，赋予定位及坐标
+            createSnow : function(){
+                var self = this;
+                self.oHtml = document.getElementsByTagName('html')[0];
+                self.oBody = document.getElementsByTagName('body')[0];
+                self.wWidth = self.oHtml.clientWidth;
+                self.wHeight = self.oHtml.clientHeight;
+                self.maxSnowNumber = 100;
+                self.domE = document.createElement('div');
+                var arrSnow = ['❈','＊','✿','❀','☸','☃','ღ'];
+                var arrColor = ['rgb(255,0,0)','rgb(255,128,0)','rgb(255,255,0)','rgb(0,255,0)','rgb(0,255,255)','rgb(0,0,255)','rgb(128,0,255)'];
+                // 创建随机数
+                var random1 = Math.round(Math.random() * 6);
+                // 赋予内容、颜色、定位方式
+                self.domE.innerHTML = arrSnow[random1];
+                self.domE.style.color = arrColor[random1];
+                self.domE.style.position = 'absolute';
+                // 赋予初始随机位置
+                self.domE.style.top = 0;
+                self.domE.style.left = Math.round(Math.random() * self.wWidth) + 'px';
+                self.oBody.appendChild(self.domE);
+                self.arr.push(self.domE);
+            },
+            // 赋予雪花速度及方向
+            moveSnow: function(option1) {
+                var self = this;
+                var left = parseInt(option1.style.left);
+                var top = parseInt(option1.style.top);
+                var v = Math.round(Math.random() * 4 + 1);
+                option1.style.top = (top + v > self.wHeight - 30 ? 0 : top + v) + 'px';
+                option1.style.left = (left + v > self.wWidth - 30 ? 0 : left + v) + 'px';
+                /*self.oContent.innerHTML = ('雪花的坐标值<br/>X：' + option1.style.left + '<br/>Y：' + option1.style.top);
+                console.log(v);
+                console.log(left);
+                console.log(top);
+                console.log(self.wHeight);
+                console.log(self.wWidth);
+                */
+            },
+            // 事件执行
+            install: function() {
+                var self = this;
+                var oInput = document.getElementsByTagName('input')[0];
+                self.oContent = document.getElementsByClassName('content')[0];
+                oInput.onclick = function() {
+                    this.value = '下雪啦';
+                    // 递增添加雪花
+                    var timer = setInterval(function(){
+                        if(self.i > 1000){
+                            clearInterval(timer)
+                        };
+                        self.i++;
+                        self.createSnow();
+                    },1000);
+                    // 赋予每一朵雪花速度及方向
+                    setInterval(function(){
+                        var l = self.arr.length;
+                        for(var i = 0; i < l; i++){
+                            self.moveSnow(self.arr[i]);
+                        }
+                    },30);
+                }
+            }
+        }
+        main.init();
+    }
+    </script>
+</body>
+
+</html>
