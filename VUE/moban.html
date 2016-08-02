@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+    <head>
+        <title></title>
+        <meta charset = "utf-8">
+        <script src = "vue.js"></script>
+    </head>
+    <body>
+    <!--单双向绑定-->
+    <div id = "app">
+        {{message}}
+    </div>
+
+    <div id = "abb">
+        <p>{{message}}</p>
+        <input v-model = 'message'>
+    </div>
+
+    <script>
+    new Vue({
+    	el:'#app',
+    	data:{
+    		message:'Hellow Vue.js'
+    	}
+    });
+    new Vue({
+    	el:'#abb',
+    	data:{
+    		message:'Hello world'
+    	}
+    })
+    </script>
+    <!--渲染列表-->
+    <div id = 'aaa'>
+        <ul>
+            <li v-for = 'todo in todos'>
+                {{todo.text}}
+            </li>
+        </ul>
+    </div>
+    <script>
+    new Vue({
+    	el:'#aaa',
+    	data:{
+    		todos:[
+                {
+                	text:'Learn JavaScript'
+                },
+                {
+                	text:'Learn Vue.js'
+                },
+                {
+                	text:'Build Something Awesome'
+                }
+    		]
+    	}
+    })
+    </script>
+    <!--处理用户输入-->
+    <div id = "acc">
+        <p>{{message}}</p>
+        <button v-on:click = "reverseMessage">ReverseMessage</button>
+    </div>
+    <script>
+    new Vue({
+    	el:'#acc',
+    	data:{
+    		message:'Hellow Vue.js'
+    	},
+    	methods:{
+    		reverseMessage:function(){
+    			this.message = this.message.split('').reverse().join()
+    		}
+    	}
+    })
+    </script>
+    <!--综合-->
+    <div id = "add">
+        <input v-model = "newToDo" v-on:keyup.enter = "addToDo">
+        <ul>
+            <li v-for = "todo in todos">
+                <span>{{todo.text}}</span>
+                <button v-on:click = "removeTodo($index)">X</button>
+            </li>
+        </ul>
+    </div>
+    <script>
+    new Vue({
+    	el:'add',
+    	data:{
+    		newToDo:'',
+    		todos:[
+                {
+                	text:'Add some todos'
+                }
+    		]
+    	},
+    	methods:{
+    		addToDo:function(){
+    			var text = this.newToDo.trim()
+    			if(text){
+    				this.todos.push({text:text})
+    				this.newToDo = ''
+    			}
+    		}
+    		removeTodo:function(index){
+    			this.todos.splice(index,1)
+    		}
+    	}
+    })
+    </script>
+    <!--组件系统__所有的 Vue.js 组件其实都是被扩展的 Vue 实例。-->
+    <div id = "aee">
+        <aee-nav>121</aee-nav>
+        <aee-view>
+            <aee-sidebar>12</aee-sidebar>
+            <aee-content>12</aee-content>
+        </aee-view>
+    </div>
+    <script>
+
+    </script>
+    <P>-------------分割线-------------------</P>
+    <P>-----列表渲染--------</P>
+    <ul id = "example-1">
+        <li v-for = "item in items">
+            {{item.message}}
+        </li>
+    </ul>
+    <script>
+    var example1 = new Vue({
+        el:'#example-1',
+        data:{
+            items:[
+            {message:'foo'},
+            {message:'bar'}
+            ]
+        }
+    })
+    </script>
+    <p>-------------------</p>
+    <ul id = "example-2">
+        <li v-for = "item in items">
+            {{parentMessage}} - {{$index}} - {{item.message}}
+        </li>
+    </ul>
+    <script>
+    var example2 = new Vue({
+        el:'example-2',
+        data:{
+            parentMessage:'Parent',
+            items:[
+            {message:'foo'},
+            {}]
+        }
+    })
+    </script>
+    </body>
+</html>

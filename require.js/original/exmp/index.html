@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>zero</title>
+	<!-- 菜鸟教程以这个示例来说明require.js的作用。将js文件放入head标签里边来说明js的阻塞作用，但是为什么不把js文件放在body的前一个节点呢？ -->
+	<script src = "../../js/require.js"></script>
+	<!-- 现在是用了requirejs后的效果，它确实有在head标签内引入js文件时解决阻塞的作用 -->
+	<script>
+		require(["b"]);
+	</script>
+    <!-- <script src = "a.js"></script> -->
+</head>
+<body>
+	<span>Hello word!</span>
+
+</body>
+</html>
