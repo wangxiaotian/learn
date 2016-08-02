@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 常用的表单指令：ng-selected; ng-checked;  -->
+<head>
+    <meta charset="UTF-8">
+    <title>常用到的指令</title>
+    <script src = "../js/angular.min.js"></script>
+    <style>
+    	.space{
+    		margin-top:20px;
+    	}
+    </style>
+</head>
+
+<body ng-app = "app">
+    <div ng-controller = "Fctrl">
+        <form action="">
+            <fieldset>
+                <legend>基本信息</legend>
+                <img src="" alt="">
+                <div>
+                    <input class = "space" type="text" placeholder="用户名" required><br>
+                    <input class = "space" type="password" placeholder="密码"><br> 职位：
+                    <!-- 此处ng-disabled指令当返回false时，会将下拉框置于不可用状态 -->
+                    <select class = "space" name="" id="" ng-disabled = "1===1">
+                        <option value="">--请选择--</option>
+                        <!-- 此处下拉框的选择原理与checkbox相同，都是利用DOM和js中的数据绑定异同来做出执行 -->
+                        <option value="1" ng-selected = "user.zw == '1'">JAVA工程师</option>
+                        <option value="2" ng-selected = "user.zw == '2'">.NET工程师</option>
+                    </select><br>
+                    性别：
+                    <!-- ng-checked = "user.sex=='1'",根据其值在DOM中和JS中是否相等来设置checkbox选中状态 -->
+                    <input class = "space" type="radio" name="sex" ng-checked = "user.sex == '1'">&nbsp;男&nbsp;
+                    <input type="radio" name="sex" ng-checked = "user.sex=='0'">&nbsp;女&nbsp;
+                </div>
+            </fieldset>
+            <fieldset>
+            	<legend>爱好</legend>
+            	<!-- 此处的原理和单选框是一样的，还是应用的DOM与js中的数据双向绑定，返回true或者false来实现多选 -->
+            	<input type="checkbox" ng-checked = "ischecked(1)">篮球
+            	<input type="checkbox" ng-checked = "ischecked(2)">足球
+            	<input type="checkbox" ng-checked = "ischecked(3)">排球
+            </fieldset>
+            <button ng-disabled = "f.$invalid" type = "submit" class = "button expand">提交</button>
+        </form>
+    </div>
+    <script>
+    	angular.module('app',[])
+    	.controller('Fctrl',function($scope){
+            $scope.user = {
+            	isShowImg : true,
+            	showicon : true,
+            	icon : 'image/logo.jpg',
+            	uname : '',
+            	pwd : '',
+            	zw : '1',
+            	sex : '1',
+            	aihao : [1,3]
+            }
+            $scope.ischecked = function(n){
+                var isok = false;
+                for(var i = 0; i < $scope.user.aihao.length; i++){
+                	if( n == $scope.user.aihao[i]){
+                		isok = true;
+                		break;
+                	}
+                }
+                return isok;
+            }
+    	})
+    </script>
+</body>
+
+</html>

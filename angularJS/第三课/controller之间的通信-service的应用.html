@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>controller之间的数据共享</title>
+</head>
+<body ng-app = "app">
+	<div ng-controller = "Fctrl">
+		<input type="text" ng-model = "data.msg">
+		<input type="text" ng-model = "data1.msg">
+		<h2>{{data.msg}}</h2>
+	</div>
+	<div ng-controller = "Sctrl">
+		<input type="text" ng-model = "data.msg">
+		<h2>{{data.msg}}</h2>
+		<h2>{{data1.msg}}</h2>
+	</div>
+	<script src = "../js/angular.min.js"></script>
+	<script src = "app.js"></script>
+	<script>
+	    /*实现共享数据，即通信的原理为另外定义一个变量，暂且叫全局变量，然后作为参数传递到互不通信的controller中实现数据共享*/
+		angular.module('app',[])
+		.factory('Data',function(){
+			return {
+				msg : '我来自factory'
+			}
+		})
+		.controller('Fctrl',function($scope,Data){
+            $scope.data = {
+            	msg : '第一个'
+            }
+            /*这个地方要绑定到Data,不能绑定到Data.msg;如此才能共享Data里边的数据，即绑定到最顶层那个*/
+            $scope.data1 = Data;
+		})
+		.controller('Sctrl',function($scope,Data){
+            $scope.data = {
+            	msg : '第二个'
+            }
+            $scope.data1 = Data;
+		})
+	</script>
+</body>
+</html>
