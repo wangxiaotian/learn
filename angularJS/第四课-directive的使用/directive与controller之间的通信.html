@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>directive与controller之间的通信</title>
+	<script src = "../js/angular.min.js"></script>
+</head>
+<body>
+	<div ng-app = "app">
+		<div ng-controller = "Fctrl">
+		    <!-- 与传统的方法相比较：
+		    1、不需要取DOM对象了
+		    2、模块可以移植，并且是有对应的DOM的，即将DOM与JS耦合在一起作为一个模块，以DOM属性或angular特性为接口，方便。移植时可以完美移植
+		    2、例子太简单，别的还想不出 -->
+			<div hello = "func2()">滑动到这里来</div>
+			<!-- 上面的这种方式更加灵活，通过操作可以调用多种函数，并且接口是通过改变DOM的属性来实现的，相比传统绑定事件的方法方便多了，并且不用的方法也不需要删除 -->
+		</div>
+	</div>
+	<script>
+		var app = angular.module('app',[])
+		/*这里第一次发现controller竟然是声明管理边界变量的属性*/
+		app.controller('Fctrl',function($scope){
+            $scope.func1 = function(){
+            	alert('正在加载数据')
+            }
+            $scope.func2 = function(){
+            	alert('正在删除数据')
+            }
+		})
+		app.directive('hello',function(){
+			return {
+				restrict : 'A',
+				/*这里有三个参数，scope就是controller里边的$scope,element就是hello绑定到的DOM标签那个元素对象，bind是一个绑定事件的方法。*/
+                link : function(scope,element,attrs){
+                    element.bind('mouseenter',function(){
+                    	/*scope.func1();*/
+                    	/*另外的的调用方法， 注意这里传递的参数是调用后的函数*/
+                    	/*scope.$apply('func1()')*/
+                    	/*更加灵活地调用方式*/
+                    	scope.$apply(attrs.hello)
+                    })
+                }
+			}
+		})
+	</script>
+</body>
+</html>

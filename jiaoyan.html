@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jiaoyan </title>
+	<script src = "jquery-1.12.2.js"></script>
+</head>
+<body>
+	<input type="text" id = "inp">
+	<button>提交</button>
+	<span></span>
+	<script>
+		$(function(){
+			var s = false;
+			$('button').on('click',function(){
+				if(s){
+					$('span').text('我要发送验证码了')
+				}else{
+					$('span').text('请输入正确的手机号');
+				}
+			})
+			$('input').on('input',function(){
+                s = false;
+				var str = $(this).val().replace(/[^0-9]/,'');
+				$(this).val(str);
+				var strLength = $(this).val().length;
+				if(strLength == 11){
+					s = true;
+				}
+				console.log(strLength);
+			})
+		})
+	</script>
+</body>
+</html>

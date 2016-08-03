@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>directive与controller通信2</title>
+	<script src = "../js/angular.min.js"></script>
+</head>
+<body>
+	<div ng-app = "app">
+		<div>
+			<food apple orange banana>所有食物</food><br>
+			<food apple orange>所有食物</food>
+		</div>
+	</div>
+	<script>
+		var app = angular.module('app',[]);
+		app.directive('food',function(){
+			return {
+				restrict : 'E',
+				scope : {},
+				/*controller与link这样的属性不知是不是自定义的，另外定义controller的方法竟然可以传递$scope参数，是没有特殊意义的，还是与controller中的参数有关系呢？*/
+				controller : function($scope){
+					$scope.foods = [];
+					this.addApple = function(){
+						$scope.foods.push('apple');
+					}
+					this.addOrange = function(){
+						$scope.foods.push('orange');
+					}
+					this.addBanana = function(){
+						$scope.foods.push('banana');
+					}
+				},
+				link : function(scope,element,attrs){
+					element.bind('mouseenter',function(){
+						console.log(scope.foods);
+					})
+				}
+			}
+		})
+		app.directive('apple',function(){
+			return {
+				/*这个参数教程解释说是加载什么内容，不知是自定义的还是，有在别处定义过的*/
+				require : 'food',
+				/*directive 是通过foodCtrl调用方法的，而其只是个参数而已，故link函数是被定义过的，foodCtrl是被定义过的，其是与controller相关联的，故能调用controller里边定义的方法，后台机制，只能记住好了*/
+				link : function(scope,element,attrs,foodCtrl){
+                    foodCtrl.addApple();
+				}
+			}
+		})
+		app.directive('orange',function(){
+			return {
+				/*这个参数教程解释说是加载什么内容，不知是自定义的还是，有在别处定义过的*/
+				require : 'food',
+				link : function(scope,element,attrs,foodCtrl){
+                    foodCtrl.addOrange();
+				}
+			}
+		})
+		app.directive('banana',function(){
+			return {
+				/*这个参数教程解释说是加载什么内容，不知是自定义的还是，有在别处定义过的*/
+				require : 'food',
+				link : function(scope,element,attrs,foodCtrl){
+                    foodCtrl.addBanana();
+				}
+			}
+		})
+	</script>
+</body>
+</html>

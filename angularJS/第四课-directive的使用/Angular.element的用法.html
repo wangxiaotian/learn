@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>.element的类似jQuery的用法</title>
+    <script src="../js/angular.min.js"></script>
+    <script src="../css/foundation.min.css"></script>
+</head>
+
+<body>
+    <div ng-app="app">
+        <div enter>
+            i am here
+        </div>
+        <hello></hello>
+    </div>
+    <script>
+    var app = angular.module('app', []);
+    app.directive('enter', function() {
+        return function(scope, element, attrs) {
+        	/*这里element的方法是与jQuery中的方法定义相同的，可以使用与jQuery方法同名的方法*/
+            element.bind('mouseenter', function() {
+                element.addClass('alert-box');
+            })
+        }
+
+    })
+    app.directive('hello',function(){
+    	return {
+    		restrict : 'E',
+    		template : '<div><input ng-model = "txt"></div><div>{{txt}}</div>'
+    	}
+    })
+    </script>
+</body>
+
+</html>

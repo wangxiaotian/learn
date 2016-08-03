@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Directive的简单使用</title>
+	<script src = "../js/angular.min.js"></script>
+</head>
+<body>
+	<div ng-app = "app">
+	    <!-- 通过属性绑定函数，并且是立即执行的，有什么用啊 -->
+		<div hello></div>
+		<div jike class = "hello"></div>
+	</div>
+	<script>
+	    /*这里声明管理边界后，赋给了一个变量，一个有方法的变量，没有用到controller绑定数据*/
+		var app = angular.module('app',[])
+		/*属性*/
+		/*app.directive('hello',function(){
+			return {
+				
+				restrict : 'A',
+				link : function(){
+					alert('I am here')
+				}
+			}
+		})*/
+		/*class,与属性的作用是一样的，绑定形式不同*/
+		app.directive('hello',function(){
+			return{
+				restrict : 'C',
+				link : function(){
+					alert('I am here')
+				}
+			}
+		})
+		/*声明的app变量可以多次调用，并且可以放在一个标签内使用，互不冲突*/
+		app.directive('jike',function(){
+			return{
+				restrict : 'A',
+				link : function(){
+					alert('I am jike')
+				}
+			}
+		})
+	</script>
+</body>
+</html>

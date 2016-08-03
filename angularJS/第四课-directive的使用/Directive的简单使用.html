@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Directive的简单使用</title>
+	<script src = "../js/angular.min.js"></script>
+</head>
+<body>
+	<div ng-app = "app">
+	    <!-- JS中的模板通过自定义DOM标签嵌入DOM中，有什么意义：
+	    1.复用？
+	    2.方式简便？
+	    3.这个是最大的魅力所在？比如复用的弹出层，等等
+	    缺点：1.无法绑定数据？也不是吧2.如何去服务器数据交互？方便吗？ -->
+		<hello></hello>
+	</div>
+	<script>
+	    /*这里声明管理边界后，赋给了一个变量，一个有方法的变量，没有用到controller绑定数据*/
+		var app = angular.module('app',[])
+		app.directive('hello',function(){
+			return {
+				/*元素*/
+				restrict : 'E',
+				replace : true,
+				template : '<div>Hello Angularjs</div>'
+			}
+		})
+	</script>
+</body>
+</html>
