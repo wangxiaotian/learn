@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>方法与事件处理器</title>
+	<script src="../vue.js"></script>
+</head>
+<body>
+	<div id = "example1">
+		<button v-on:click = "greet">Greet</button>
+	</div>
+	<script>
+		var example1 = new Vue({
+			el : 'example1',
+			data : {
+				name : 'Vue.js'
+			},
+			// 在'methods'对象中定义方法
+			methods : {
+				greet : function(){
+					// 方法内'this'指向vm
+					alert('Hello' + this.name + '!');
+					// 'event'是原生DOM事件
+					alert(event.target.tagName)
+				}
+			}
+		})
+		// 也可以在JavaScript代码中调用方法
+		example1.greet();
+	</script>
+</body>
+</html>

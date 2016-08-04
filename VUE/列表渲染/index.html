@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>列表渲染</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <h3>实例1：</h3>
+    <ul id="example-1">
+        <!-- 根据数组长度来动态渲染列表，哦，可以将数组数据关联服务器数据的，如此，就不用自己写模板来渲染了，也不要for循环了，是个亮点 -->
+        <li v-for="item in items">{{item.message}}</li>
+    </ul>
+    <script>
+    var example1 = new Vue({
+        el: "#example-1",
+        data: {
+            items: [{
+                message: 'Foo'
+            }, {
+                message: 'Bar'
+            }]
+        }
+    })
+    </script>
+    <h3>实例2：</h3>
+    <ul id = "example-2">
+        <!-- 这里提供了一个值$index，其表示循环数组时的下标值 -->
+    	<li v-for = "item in items">{{parentMessage}} - {{$index}} - {{item.message}}</li>
+    </ul>
+    <script>
+    	var example2 = new Vue({
+    		el : '#example-2',
+    		data : {
+    			parentMessage : 'Parent',
+    			items : [{
+    			message : 'nihao'
+    		},{
+    			message : '我好'
+    		}]
+    		}
+    	})
+    </script>
+    <h3>实例3：</h3>
+    <ul id = "repeat-object" class = "demo">
+    	<li v-for = "value in object">
+    		{{$key}} : {{value}}
+    	</li>
+    </ul>
+    <script>
+    	var example3 = new Vue({
+    		el : '#repeat-object',
+    		data : {
+    			object : {
+    				FirstName : 'John',
+    				LastName : 'Doe',
+    				Age : 30
+    			}
+    		}
+    	})
+    </script>
+    <!-- 没有用，不会用 -->
+    <h3>实例4：</h3>
+    <div>
+    	<span v-for = "n in 10">{{n}}</span>
+    </div>
+
+</body>
+
+</html>
