@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>表格渲染</title>
+    <script src="js/doT.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <style>
+    	.table{
+    		border:1px solid #ccc;
+    		border-collapse:collapse;
+    	}
+        .table th,.table td{
+        	border:1px solid #ccc;
+        	padding:5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>用模板渲染表格</h3>
+    <p>此种渲染方法，对数据的依赖程度很大:<br>
+        1、列数是固定的，td是写死在模板中的，无法适应数据的变化来增减列数<br>
+        2、数据是固定的，即编写数据时根据数据里对象的属性直接写死，限制了数据的变化，如果数据的属性发生变化就不能用了
+    </p>
+    <p>
+    	哪些是可以抽出来的？<br>
+    	1、td要抽出来，即td要以循环遍历的方法来写
+    </p>
+    <div id="table">
+        <script id = "template" type = "text/template" charset = "utf-8">
+        	{{ if(it && it.length>0){ }} 
+        	<table class = "table">
+        	    <thead>
+        	        <tr>
+        	            <th>工号</th><th>姓名</th><th>部门</th><th>职务</th>
+        	        </tr>
+        	    </thead>
+        	    <tbody>
+        	        {{for(var i = 0; i < it.length; i++){ }}
+        	        <tr>
+        	            <td>{{=it[i].number}}</td>
+        	            <td>{{=it[i].name}}</td>
+        	            <td>{{=it[i].department}}</td>
+        	            <td>{{=it[i].role}}</td>
+        	        </tr>
+        	        {{ } }}
+        	    </tbody>
+        	</table>
+        	{{ } }}
+        </script>
+    </div>
+    <script>
+    $(function() {
+        // 设计表格数据形式，只渲染表格体，先不渲染表头
+        var data = {
+            "status": 0,
+            "data": [{
+                "id": 1,
+                "number": "001",
+                "name": "小强",
+                "department": "项目部",
+                "role": "公司领导"
+            }, {
+                "id": 2,
+                "number": "002",
+                "name": "小明",
+                "department": "设计部",
+                "role": "机械设计"
+            },{
+                "id": 2,
+                "number": "003",
+                "name": "小才",
+                "department": "装配部",
+                "role": "机械装配"
+            }]
+        }
+        var template = $('#template').html();
+        $('#table').html(doT.template(template)(data.data));
+    })
+    </script>
+</body>
+
+</html>

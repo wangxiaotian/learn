@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>dot模板</title>
+    <script src="js/doT.js"></script>
+    <script src="js/jquery.min.js"></script>
+</head>
+
+<body>
+    <h3>循环语句</h3>
+    <h3>语句的写法</h3>
+    <ul>
+        <li>1.doT对象的写法是doT,不是dot</li>
+        <li>2、循环数组数据加载列表的原理就是条件语句判断长度和循环遍历数据节点</li>
+        <li>3、语言的写法除了JS语句加上双大括号外与原生JS写法完全相同</li>
+        <li>4、很重要的一点：在插值写法中，即{{=it[i].name}}。=号前边不能有空格</li>
+    </ul>
+    <p>--------------------------------------------------------------------</p>
+    <div id="content">
+        <ul id="list1">
+            <script id="template_list1" type="text/template" charset="utf-8">
+                {{ if(it && it.length > 0){ }} {{ for(var i = 0; i
+                < it.length; i++){ }}<li>{{=it[i].name}}</li> {{ } }} {{ }else{ }}
+                    <li>没有数据</li> {{ } }}
+            </script>
+        </ul>
+        <h3>操作符的写法</h3>
+        <ul>
+            <li>这种写法所见到的说明不多，根据参考总结如下：</li>
+            <li>1、{{~it:item}} 循环以这种语句开始，it为数据源数组形式，item为下标所对应的值。这是一种写法，可以执行遍历，适用于数组内一个元素的</li>
+            <li>2、</li>
+        </ul>
+        <p>-------------------------------------------------------------</p>
+        <ul id="list2">
+            <script id="template_list2" type="text/template" charset="utf-8">
+                {{~it:item}}
+                <li>{{=item}}</li>
+            </script>
+        </ul>
+        <h3>条件语句和循环语句综合运用的操作法写法</h3>
+        <ul>
+            <li>条件语句的用法：{{? }}注意有空格的 相当于 if ; {{?? }} else if 空格地方跟的是条件 ; {{??}} else 不在附加条件 ; {{?}} 条件语句的结束</li>
+            <li>! 感叹号的作用与JS语法中的是一样的</li>
+        </ul>
+        <p>-----------------------------------------</p>
+        <ul id="condition">
+            <script id="conditionstmpl" type="text/template" charset="utf-8">
+                {{? it && it.length > 0 }}
+                {{~ it:item}}
+                <li>{{=item}}</li>
+                {{?}}
+                <li>没有数据</li>
+            </script>
+        </ul>
+    </div>
+    <script>
+    var oJson = [{
+        "name": "《公安部关于公安机关维护校园及周边治安秩序八条措施》",
+    }, {
+        "name": "铁路交通事故应急救援和调查处理条例"
+    }, {
+        "name": "中华人民共和国水污染防治法"
+    }, {
+        "name": "建设安全工程安全生产管理条例"
+    }, {
+        "name": "地质灾害防治条例"
+    }, {
+        "name": "中华人民共和国传染病防治法"
+    }, {
+        "name": "中华人民共和国传染病防治法"
+    }, {
+        "name": "中华人民共和国传染病防治法"
+    }, {
+        "name": "中华人民共和国传染病防治法"
+    }, {
+        "name": "中华人民共和国传染病防治法"
+    }, {
+        "name": "中华人民共和国传染病防治法"
+    }];
+    var data = {"name" : "jake","age" : 31};
+    $(function() {
+        var template = $('#template_list1').html();
+        $('#list1').html(doT.template(template)(oJson));
+        var template2 = $('#template_list2').html();
+        $('#list2').html(doT.template(template)(oJson));
+
+        var EncodeText = doT.template($("#conditionstmpl").text());
+        $("#condition").html(EncodeText(oJson));
+    })
+    </script>
+</body>
+
+</html>
