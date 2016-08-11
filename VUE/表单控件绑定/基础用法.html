@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>基础用法</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="example">
+        <span>Message is : {{message}}</span>
+        <br>
+        <input type="text" v-model="message" placeholder="edit me">
+    </div>
+    <script>
+    /*一定要创建一个实例，菜能起作用，不同于angular*/
+    var a = new Vue({
+        el: '#example',
+        data: {
+            message: 'nihao'
+        }
+    })
+    </script>
+    <div id="example2">
+        <h3>Multiline text 多行</h3>
+        <span>Multiline message is:</span>
+        <p>{{message}}</p>
+        <br>
+        <textarea v-model="message" placeholder="add multiple lines" name="" id="" cols="30" rows="10"></textarea>
+    </div>
+    <script>
+    var b = new Vue({
+        el: '#example2',
+        data: ''
+    })
+    </script>
+    <h3>Checkbox</h3>
+    <div id="example3">
+        <input type="checkbox" id="checkbox" v-model="checked">
+        <label for="checkbox">{{checked}}</label>
+    </div>
+    <script>
+    var c = new Vue({
+        el: '#example3',
+        data: ''
+    })
+    </script>
+    <span>----------------------------------</span>
+    <div id="example4">
+        <input type="checkbox" id="jack" value="jack" v-model="checkeNames">
+        <label for="jack">Jack</label>
+        <input type="checkbox" id="john" value="John" v-model="checkeNames">
+        <label for="jack">John</label>
+        <input type="checkbox" id="mike" value="Mike" v-model="checkeNames">
+        <label for="mike">Mike</label>
+        <br>
+        <span>Checked names: {{checkedNames | json}}</span>
+    </div>
+    <script>
+    var d = new Vue({
+        el: '#example4',
+        data: {
+            checkedNames: [1, 2, 3]
+        }
+    })
+    </script>
+    <div id="Radio">
+        <input type="radio" id="one" value="One" v-model="picked">
+        <label for="one">One</label>
+        <br>
+        <input type="radio" id="two" value="Two" v-model="picked">
+        <label for="two">Two</label>
+        <br>
+        <span>Picked:{{picked}}</span>
+    </div>
+    <script>
+    var e = new Vue({
+        el: '#Radio',
+        data: ''
+    })
+    </script>
+    <h3>Select</h3>
+    <div id="example6">
+        <select name="" id="" v-model="selected">
+            <option selected>A</option>
+            <option>B</option>
+            <option>C</option>
+        </select>
+        <span>Selected:{{selected}}</span>
+    </div>
+    <script>
+        /*通过vue将DOM中的选中状态提取出来，保存在一个变量中*/
+    	var f = new Vue({
+    		el : '#example6',
+    		data :''
+    	})
+    </script>
+    <h3>动态选项</h3>
+    <select name="" id="example7">
+    	<option v-for="option in options" v-bind:value="option.value">
+    		{{option.text}}
+    	</option>
+    </select>
+    <span>Selected:{{selected}}</span>
+    <script>
+    	var g = new Vue({
+    		el : 'example7',
+    		data : {
+    			selected:'A',
+    			options:[{
+    				text : 'One',value:'A'
+    			},{
+    				text:'Two',value:'B'
+    			},{
+    				text : 'Three',value:'C'
+    			}]
+    		}
+    	})
+    </script>
+</body>
+
+</html>

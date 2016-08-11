@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>new test</title>
+	<script src="../vue.js"></script>
+</head>
+<body>
+	<div id="test">
+		<p>User:{{username}}</p>
+		<input type="text" v-model = "username">
+		<!-- 通过指令处理事件，本例中为v-on:events -->
+		<button v-on:click="defaultUser">Default User</button>
+	</div>
+	<script>
+		test = new Vue({
+			el : '#test',
+			data : {
+				username : 'Luke'
+			},
+			methods : {
+				changeName : function(name){
+					this.username = name;
+				},
+				defaultUser:function(){
+					this.changeName('tian')
+				}
+			}
+		})
+	</script>
+</body>
+</html>

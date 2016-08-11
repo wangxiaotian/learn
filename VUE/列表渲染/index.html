@@ -45,7 +45,7 @@
     </script>
     <h3>实例3：</h3>
     <ul id = "repeat-object" class = "demo">
-    	<li v-for = "value in object">
+    	<li v-for = "value in datas">
     		{{$key}} : {{value}}
     	</li>
     </ul>
@@ -53,7 +53,7 @@
     	var example3 = new Vue({
     		el : '#repeat-object',
     		data : {
-    			object : {
+    			datas : {
     				FirstName : 'John',
     				LastName : 'Doe',
     				Age : 30
@@ -63,10 +63,15 @@
     </script>
     <!-- 没有用，不会用 -->
     <h3>实例4：</h3>
-    <div>
+    <div id = "numb">
     	<span v-for = "n in 10">{{n}}</span>
     </div>
-
+    <!-- 所有的vue效果都要有vue实例才能表现出来 -->
+    <script>
+        var example4 = new Vue({
+            el : '#numb'
+        })
+    </script>
 </body>
 
 </html>
