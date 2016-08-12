@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>客户列表</title>
+    <script src="js/doT.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script id="cuslist" type="text/x-dot-template">
+        <table border="1">
+            {{ for(var prop in it){ }} {{? typeof it[prop]['appName']=='object' }}
+            <tr>
+                <td rowspan="{{=it[prop]['appName'].length}}">{{=it[prop]['cusName']}}</td>
+                <td>{{=it[prop]['appName'][0]}}</td>
+                <td>{{=it[prop]['appTime'][0]}}</td>
+            </tr>
+            {{ for(var prop2=1;prop2
+            <it[prop][ 'appName'].length; prop2++ ){ }} <tr>
+                <td>{{=it[prop]['appName'][prop2]}}</td>
+                <td>{{=it[prop]['appTime'][prop2]}}</td>
+                </tr>
+                {{ } }} {{?? }}
+                <tr>
+                    <td>{{=it[prop]['cusName']}}</td>
+                    <td>{{=it[prop]['appName']}}</td>
+                    <td>{{=it[prop]['appTime']}}</td>
+                </tr>
+                {{?}} {{ } }}
+                </tableb>
+    </script>
+    <script type="text/javascript" src="js/doT.min.js"></script>
+</head>
+
+<body>
+    <div id="table-list">
+    </div>
+</body>
+<script type="text/javascript">
+var cusDate = [{
+    "cusName": "天X信息技术有限公司",
+    "appName": ["好管家", "朋友圈"],
+    "appTime": ["2015-07-12", "2015-07-12"],
+    "appPeop": ["张三", "李连清"]
+}, {
+    "cusName": "天X信息公司",
+    "appName": ["好管家", "朋友圈"],
+    "appTime": ["2015-07-12", "2015-07-23"],
+    "appPeop": ["张三", "李连清"]
+}, {
+    "cusName": "天X信息技公司",
+    "appName": "好管家",
+    "appTime": "2015-07-12",
+    "appPeop": "张青"
+}, {
+    "cusName": "天X公司",
+    "appName": "好管家,a+",
+    "appTime": "2015-07-12",
+    "appPeop": "张青"
+}, ];
+//tmpljson={"testmode":"<td class='tab-com'>{{=trValue.cusName}}</td><td class='tab-other'>{{=trValue.appName}}</td><td class='tab-other'>{{=trValue.appTime}}</td><td class='tab-name'>aaa{{=trValue.appPeop}}</td>"}
+//      console.log(document.getElementById("cuslist").innerHTML);
+console.log('----------------------');
+var cusHtml = doT.template(document.getElementById("cuslist").innerHTML);
+document.getElementById('table-list').innerHTML = cusHtml(cusDate);
+/*document.getElementById('table-list').innerHTML= doT.template(cusHtml,undefined)(cusDate);*/
+</script>
+
+</html>
