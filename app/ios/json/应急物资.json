@@ -1,0 +1,899 @@
+{
+    "result": "success",
+    "goodsList": [
+        {
+            "goodsName": "燕子矶应急物资存储点",
+            "goodsBelong": "燕子矶街道",
+            "goodsAddress": "栖霞区燕子矶街道和燕路507号",
+            "goodsConn": "邱家宏",
+            "goodsPhone": "13951828529",
+            "goodsDetail": [
+                {
+                    "gName": "手套",
+                    "gCount": "60",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "防刺背心",
+                    "gCount": "60",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "灭火毯",
+                    "gCount": "45",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "电筒",
+                    "gCount": "40",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "救护车",
+                    "gCount": "1",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "无线对讲机",
+                    "gCount": "20",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "水车",
+                    "gCount": "1",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "救援车",
+                    "gCount": "3",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "担架",
+                    "gCount": "10",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "灭火器",
+                    "gCount": "20",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "头盔",
+                    "gCount": "60",
+                    "gState": "可用"
+                }
+            ]
+        },
+        {
+            "goodsName": "栖霞区住房和建设局应急物资储备点",
+            "goodsBelong": "燕子矶街道",
+            "goodsAddress": "栖霞区和燕路365号建设大厦	",
+            "goodsConn": "胡达贵",
+            "goodsPhone": "13801580399",
+            "goodsDetail": [
+                {
+                    "gName": "CAT挖掘机",
+                    "gCount": "8",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "推土机",
+                    "gCount": "5",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "推土机",
+                    "gCount": "2",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "推土机",
+                    "gCount": "1",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "三轮压路机",
+                    "gCount": "4",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "振动压路机",
+                    "gCount": "2",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "北方奔驰运土车",
+                    "gCount": "8",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "康明斯运土车",
+                    "gCount": "8",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "斯太尔运土车",
+                    "gCount": "8",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "道路切割机",
+                    "gCount": "2",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "发电机",
+                    "gCount": "2",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "抢险指挥车",
+                    "gCount": "1",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "应急救援车",
+                    "gCount": "1",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "依维柯",
+                    "gCount": "1",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "全顺小客车",
+                    "gCount": "1",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "小型货车",
+                    "gCount": "2",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "油罐车",
+                    "gCount": "1",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "洒水车",
+                    "gCount": "1",
+                    "gState": "可用"
+                }
+            ]
+        },
+        {
+            "goodsName": "南京锦湖轮胎有限公司",
+            "goodsBelong": "燕子矶街道",
+            "goodsAddress": "栖霞区和燕路418号",
+            "goodsConn": "顾一峰",
+            "goodsPhone": "13512528379",
+            "goodsDetail": [
+                {
+                    "gName": "碳酸钙（CaCO3）",
+                    "gCount": "1",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "吸油毡",
+                    "gCount": "100",
+                    "gState": "可用"
+                }
+            ]
+        },
+        {
+            "goodsName": "中国石油化工金陵分公司",
+            "goodsBelong": "燕子矶街道",
+            "goodsAddress": "栖霞区甘家巷",
+            "goodsConn": "陆鹏宇",
+            "goodsPhone": "13851492461",
+            "goodsDetail": [
+                {
+                    "gName": "氨水（NH4OH）",
+                    "gCount": "100",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "吸油毡",
+                    "gCount": "100",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "围油栏",
+                    "gCount": "480",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "PVC围油栏",
+                    "gCount": "1000",
+                    "gState": "可用"
+                }
+            ]
+        },
+        {
+            "goodsName": "南京电气(集团)有限公司",
+            "goodsBelong": "燕子矶街道",
+            "goodsAddress": "栖霞区太新路63号",
+            "goodsConn": "姚志恒",
+            "goodsPhone": "13002513245",
+            "goodsDetail": [
+                {
+                    "gName": "苏打灰（Na2CO3）",
+                    "gCount": "1000",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "石英沙",
+                    "gCount": "1000",
+                    "gState": "可用"
+                }
+            ]
+        },
+        {
+            "goodsName": "栖霞区迈皋桥应急物资存储仓库",
+            "goodsBelong": "迈皋桥街道",
+            "goodsAddress": "迈皋桥街道寅春路1号",
+            "goodsConn": "张枫",
+            "goodsPhone": "",
+            "goodsDetail": [
+                {
+                    "gName": "水泵",
+                    "gCount": "4",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "沙袋",
+                    "gCount": "500",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "救生衣",
+                    "gCount": "15",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "铁锹",
+                    "gCount": "300",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "洋镐",
+                    "gCount": "40",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "水管",
+                    "gCount": "1000",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "水裤",
+                    "gCount": "15",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "应急灯",
+                    "gCount": "10",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "雨衣",
+                    "gCount": "50",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "工具车",
+                    "gCount": "3",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "安全帽",
+                    "gCount": "50",
+                    "gState": "可用"
+                }
+            ]
+        },
+        {
+            "goodsName": "栖霞房产经营有限公司防汛器材储备点",
+            "goodsBelong": "迈皋桥街道",
+            "goodsAddress": "栖霞区迈皋桥街道和燕路354号	",
+            "goodsConn": "范南翔",
+            "goodsPhone": "",
+            "goodsDetail": [
+                {
+                    "gName": "应急灯",
+                    "gCount": "",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "黄砂",
+                    "gCount": "",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "救生衣",
+                    "gCount": "",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "铁镐",
+                    "gCount": "2",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "圆木",
+                    "gCount": "",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "8#铁丝",
+                    "gCount": "1",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "深筒胶靴",
+                    "gCount": "4",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "编织袋",
+                    "gCount": "",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "红砖",
+                    "gCount": "",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "毛竹片",
+                    "gCount": "",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "彩条蛇皮布",
+                    "gCount": "",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "雨衣",
+                    "gCount": "",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "防汛帐篷",
+                    "gCount": "",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "手电筒",
+                    "gCount": "",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "铁锹（尖平）",
+                    "gCount": "",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "油毡",
+                    "gCount": "",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "梯子",
+                    "gCount": "4",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "纱手套",
+                    "gCount": "10",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "大号磅锤",
+                    "gCount": "",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "电线",
+                    "gCount": "",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "水泥",
+                    "gCount": "",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "椽子",
+                    "gCount": "",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "麻绳",
+                    "gCount": "",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "尼龙绳",
+                    "gCount": "",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "捆扎胶带",
+                    "gCount": "",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "尼龙扎带",
+                    "gCount": "",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "铁磁钳",
+                    "gCount": "",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "老虎钳",
+                    "gCount": "",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "元钉",
+                    "gCount": "",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "钉锤",
+                    "gCount": "",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "锯子",
+                    "gCount": "",
+                    "gState": "可用"
+                }
+            ]
+        },
+        {
+            "goodsName": "江苏金桐化学工业有限公司",
+            "goodsBelong": "尧化街道",
+            "goodsAddress": "栖霞区尧新大道201号",
+            "goodsConn": "谢永生",
+            "goodsPhone": "13813359902",
+            "goodsDetail": [
+                {
+                    "gName": "石灰（CaO）",
+                    "gCount": "8",
+                    "gState": "可用"
+                }
+            ]
+        },
+        {
+            "goodsName": "金陵分公司烷基苯厂",
+            "goodsBelong": "尧化街道",
+            "goodsAddress": "南京尧化门谢冲120号",
+            "goodsConn": "俞志平",
+            "goodsPhone": "13805157915",
+            "goodsDetail": [
+                {
+                    "gName": "碳酸钙（CaCO3）",
+                    "gCount": "2",
+                    "gState": "可用"
+                }
+            ]
+        },
+        {
+            "goodsName": "马群百水芊城防汛物资仓库",
+            "goodsBelong": "马群街道",
+            "goodsAddress": "栖霞区马群街道百水桥村118号",
+            "goodsConn": "王太忠",
+            "goodsPhone": "13951951673",
+            "goodsDetail": [
+                {
+                    "gName": "电动潜水泵",
+                    "gCount": "4",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "草包",
+                    "gCount": "2000",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "编制袋",
+                    "gCount": "8000",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "黄沙",
+                    "gCount": "20",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "铁锹",
+                    "gCount": "150",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "铁镐",
+                    "gCount": "30",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "镐柄",
+                    "gCount": "30",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "木材",
+                    "gCount": "2.5",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "铁丝",
+                    "gCount": "150",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "木槌",
+                    "gCount": "20",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "斧头",
+                    "gCount": "10",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "锯子",
+                    "gCount": "10",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "耙子",
+                    "gCount": "30",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "应急灯",
+                    "gCount": "20",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "彩条布",
+                    "gCount": "2000",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "雨衣",
+                    "gCount": "100",
+                    "gState": "可用"
+                }
+            ]
+        },
+        {
+            "goodsName": "马群南湾营石坝泵站",
+            "goodsBelong": "马群街道",
+            "goodsAddress": "栖霞区马群街道X575公路与南湾村交汇处",
+            "goodsConn": "王太忠",
+            "goodsPhone": "13951951673",
+            "goodsDetail": [
+                {
+                    "gName": "黄沙",
+                    "gCount": "20",
+                    "gState": "可用"
+                }
+            ]
+        },
+        {
+            "goodsName": "栖霞街道",
+            "goodsBelong": "栖霞街道",
+            "goodsAddress": "红枫街21号",
+            "goodsConn": "",
+            "goodsPhone": "",
+            "goodsDetail": [
+                {
+                    "gName": "运输车",
+                    "gCount": "",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "运输车",
+                    "gCount": "",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "防汛车",
+                    "gCount": "",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "工程车",
+                    "gCount": "",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "工程车",
+                    "gCount": "",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "农用车",
+                    "gCount": "",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "农用车",
+                    "gCount": "",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "双桥",
+                    "gCount": "",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "轮式挖机一台",
+                    "gCount": "",
+                    "gState": "可用"
+                }
+            ]
+        },
+        {
+            "goodsName": "防汛、抗旱物资储备点在衡阳泵站（街道防汛抗旱物资仓库）",
+            "goodsBelong": "栖霞街道",
+            "goodsAddress": "栖霞区衡阳真衡阳泵站",
+            "goodsConn": "",
+            "goodsPhone": "",
+            "goodsDetail": [
+                {
+                    "gName": "潜水泵",
+                    "gCount": "2",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "潜水泵",
+                    "gCount": "2",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "潜水泵",
+                    "gCount": "4",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "潜水泵",
+                    "gCount": "2",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "柴油机流动泵",
+                    "gCount": "2",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "草 包",
+                    "gCount": "26000",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "麻袋",
+                    "gCount": "3200",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "编织袋",
+                    "gCount": "31670",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "铁夯",
+                    "gCount": "2",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "油锯",
+                    "gCount": "2",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "铁锹",
+                    "gCount": "35",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "铁锤",
+                    "gCount": "4",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "木材",
+                    "gCount": "6",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "木桩",
+                    "gCount": "30",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "土工布",
+                    "gCount": "300",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "彩布条",
+                    "gCount": "630",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "铁丝",
+                    "gCount": "200",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "大榔头",
+                    "gCount": "6",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "大扁担",
+                    "gCount": "4",
+                    "gState": "可用"
+                }
+            ]
+        },
+        {
+            "goodsName": "大年防汛物资仓库",
+            "goodsBelong": "龙潭街道",
+            "goodsAddress": "栖霞区龙潭街道靖江路",
+            "goodsConn": "王强",
+            "goodsPhone": "13913954709",
+            "goodsDetail": [
+                {
+                    "gName": "草包",
+                    "gCount": "25000",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "木材",
+                    "gCount": "16.03",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "块石",
+                    "gCount": "2000",
+                    "gState": "可用"
+                }
+            ]
+        },
+        {
+            "goodsName": "严闸防汛物资仓库",
+            "goodsBelong": "龙潭街道",
+            "goodsAddress": "栖霞区龙潭街道严张路	",
+            "goodsConn": "王强",
+            "goodsPhone": "13913954709",
+            "goodsDetail": [
+                {
+                    "gName": "草包",
+                    "gCount": "25000",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "土工布",
+                    "gCount": "400",
+                    "gState": "可用"
+                }
+            ]
+        },
+        {
+            "goodsName": "上首防汛物资仓库",
+            "goodsBelong": "龙潭街道",
+            "goodsAddress": "栖霞区龙潭街道上首村	",
+            "goodsConn": "王强",
+            "goodsPhone": "13913954709",
+            "goodsDetail": [
+                {
+                    "gName": "草包",
+                    "gCount": "22500",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "编织袋",
+                    "gCount": "7400",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "麻袋",
+                    "gCount": "11000",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "木材",
+                    "gCount": "16",
+                    "gState": "可用"
+                },
+                {
+                    "gName": "土工布",
+                    "gCount": "450",
+                    "gState": "可用"
+                }
+            ]
+        },
+        {
+            "goodsName": "三江口防汛物资仓库",
+            "goodsBelong": "龙潭街道",
+            "goodsAddress": "栖霞区龙潭街道三江口工业园路",
+            "goodsConn": "王强",
+            "goodsPhone": "13913954709",
+            "goodsDetail": [
+                {
+                    "gName": "块石",
+                    "gCount": "2000",
+                    "gState": "可用"
+                }
+            ]
+        },
+        {
+            "goodsName": "泰山闸防汛物资仓库",
+            "goodsBelong": "龙潭街道",
+            "goodsAddress": "栖霞区龙潭街道泰山闸长泰路",
+            "goodsConn": "王强",
+            "goodsPhone": "13913954709",
+            "goodsDetail": [
+                {
+                    "gName": "块石",
+                    "gCount": "2000",
+                    "gState": "可用"
+                }
+            ]
+        },
+        {
+            "goodsName": "牛角尖防汛物资仓库",
+            "goodsBelong": "龙潭街道",
+            "goodsAddress": "栖霞区龙潭街道牛角尖",
+            "goodsConn": "王强",
+            "goodsPhone": "13913954709",
+            "goodsDetail": [
+                {
+                    "gName": "块石",
+                    "gCount": "2000",
+                    "gState": "可用"
+                }
+            ]
+        },
+        {
+            "goodsName": "团洲圩防汛物资仓库",
+            "goodsBelong": "龙潭街道",
+            "goodsAddress": "栖霞区龙潭街道团洲圩",
+            "goodsConn": "王强",
+            "goodsPhone": "13913954709",
+            "goodsDetail": [
+                {
+                    "gName": "块石",
+                    "gCount": "1900",
+                    "gState": "可用"
+                }
+            ]
+        },
+        {
+            "goodsName": "大唐南京发电厂",
+            "goodsBelong": "龙潭街道",
+            "goodsAddress": "栖霞区靖安街道马渡村",
+            "goodsConn": "陈伟宏",
+            "goodsPhone": "13951931203",
+            "goodsDetail": [
+                {
+                    "gName": "吸油毡",
+                    "gCount": "200",
+                    "gState": "可用"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>预案库</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <script src="scripts/doT.js"></script>
+    <script src="scripts/zepto.js"></script>
+    <script src="scripts/dropload.min.js"></script>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    body {
+        font-size: 14px;
+    }
+    
+    header {
+        text-align: center;
+        background-color: #428bca;
+        color: #fff;
+        padding: 10px 0;
+        font-size: 20px;
+    }
+    
+    .search {
+        padding: 10px 5px;
+    }
+    
+    .search input {
+        border: 1px solid #aaa;
+        height: 30px;
+        width: 100%;
+    }
+    
+    a {
+        text-decoration: none;
+    }
+    
+    li {
+        list-style: none;
+        border-bottom: 1px solid #aaa;
+        padding: 10px 10px;
+        position: relative;
+        padding: 10px 0px 10px 35px;
+        background: url('images/图标.png') no-repeat 10px 20px;
+    }
+    
+    .list1 {
+        padding: 10px 0;
+    }
+    
+    .list2 {
+        font-size: 12px;
+    }
+    
+    .list {
+        display: inline-block;
+        margin-left: 20px;
+    }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h3>预案库</h3>
+    </header>
+    <div class="search">
+        <input style="text-align:center" type="search" results="s" placeholder="搜索" id="search" />
+    </div>
+    <div class="content">
+        <ul id="list">
+            <script id="template_list" type="text/template" charset="utf-8"></script>
+        </ul>
+    </div>
+    <script>
+    $(function() {
+        var data = {
+            "goodsList": [{
+                "name": "栖霞区假设工程事故应急预案",
+                "time": "2016-05-01"
+            }, {
+                "name": "栖霞区接送学生车辆交通安全事故应急处理预案",
+                "time": "2016-06-01"
+            }, {
+                "name": "栖霞区重特大生产安全事故应急预案",
+                "time": "2016-07-01"
+            }, {
+                "name": "栖霞区危险化学品生产安全事故应急预案",
+                "time": "2016-07-02"
+            }, {
+                "name": "栖霞区水污染突发事件应急预案",
+                "time": "2016-07-03"
+            }, {
+                "name": "栖霞区公路突发事件应急救援处置预案",
+                "time": "2016-07-04"
+            }]
+        };
+        window.setDataInfo = function(url, param, type) {
+            setDataInfo(url, param, type);
+        }
+        window.sendToJs = function() {
+                data = JSON.parse(option);
+                return data;
+            }
+            //setDataInfo('http://www.jsywsz.com/WebCityCrisis/getREmgerCase.do', '', 2);
+
+        window.main = {
+            //初始化函数
+            init: function() {
+                var self = this;
+                //执行
+                self.loadDom();
+                self.createDomFirst();
+                self.droploadFnc();
+                self.searchFnc();
+            },
+            //载入模板
+            loadDom : function(){
+                var str = '{{if(it && it.length>0){ }} {{for(var i = 0; i < 3; i++){ }}<li><a class="list list2" href="javascript:;">{{=it[i].caseName}}</a><span class="time">{{=it[i].caseTime}}</span></li>{{ } }} {{ }else{ }}<li>没有数据</li>{{ } }}';
+                $('#template_list').html(str);
+            },
+            //第一次加载DOM
+            createDomFirst: function() {
+                var template = $('#template_list').html();
+                $('#list').html(doT.template(template)(data.goodsList));
+            },
+            //滑动加载DOM 
+            droploadFnc: function() {
+                var counter = 0;
+                //每页展示10条数据
+                var num = 3;
+                var pageStart = 0,
+                    pageEnd = 0;
+                $('.content').dropload({
+                    scrollArea: window,
+                    domDown: {
+                        domClass: 'dropload-down',
+                        domRefresh: '<div class="dropload-refresh">↑上拉加载更多-啦啦啦</div>',
+                        domload: '<div class="dropload-load"><span class="loading"></span>加载中-等等等...</div>',
+                        domNoData: '<div class="dropload-noData">暂无数据-no no no</div>'
+                    },
+                    loadDownFn: function(me) {
+                        alert('调用滑动');
+                    },
+                    threshold: 50
+                });
+            },
+            //搜索框
+            searchFnc: function() {
+                $('#search').bind('focus', function() {
+                    $(this).css('text-align', 'left')
+                })
+                $('#search').bind('blur', function() {
+                    $(this).css('text-align', 'center')
+                })
+                $('#search').bind('keyup', function() {
+                    $('#list li').hide()
+                        .filter(":contains('" + $('#search').val() + "')").show();
+                })
+            }
+        }
+        main.init();
+
+    })
+    </script>
+    <script>
+    /*
+                window.main = {
+                    someVar: 213,
+                    init: function() {
+                        var self = this;
+
+                        self.initEvent();
+                    },
+                    someFn: function() {
+
+                    },
+                    initEvent: function() {
+                        var self = this;
+                        $('.btn').on('click', function() {
+                            self.someFn();
+                        });
+                    }
+                };
+                /*
+                main.init();
+                */
+    </script>
+</body>
+
+</html>

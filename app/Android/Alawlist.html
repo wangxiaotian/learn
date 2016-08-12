@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>法规库</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <link rel="stylesheet" href="scripts/pullToRefresh.css">
+    <script src="scripts/zepto.js"></script>
+    <script src="scripts/dropload.min.js"></script>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    body {
+        font-size: 14px;
+    }
+    
+    header {
+        text-align: center;
+        background-color: #428bca;
+        color: #fff;
+        padding: 10px 0;
+        font-size: 20px;
+    }
+    
+    .search {
+        padding: 10px 5px;
+    }
+    
+    .search input {
+        border: 1px solid #aaa;
+        height: 30px;
+        width: 100%;
+    }
+    
+    a {
+        text-decoration: none;
+    }
+    
+    li {
+        list-style: none;
+        border-bottom: 1px solid #aaa;
+        padding: 10px 10px;
+        position: relative;
+        padding: 10px 0px 10px 35px;
+        background: url('images/图标.png') no-repeat 10px 20px;
+    }
+    
+    .list1 {
+        padding: 10px 0;
+    }
+    
+    .list2 {
+        font-size: 12px;
+    }
+    
+    .list {
+        display: inline-block;
+        margin-left: 20px;
+    }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h3>应急物资</h3>
+    </header>
+    <div class="search">
+        <input style="text-align:center" type="search" results="s" placeholder="搜索" id="search" />
+    </div>
+    <div class="content">
+        <ul id="list">
+        </ul>
+    </div>
+    <script>
+    var data;
+    data = {
+        "goodsList": [{
+            "emgLawName" : "中华人民共和国水污染防治法",
+            "emgLawTime" : "2016-05-01",
+            "emgLawLevel" : "国家级",
+            "emgLawContent" : "根据我国 XXXXXXXXXXX"
+        },{
+            "emgLawName" : "中华人民共和国水污染防治法",
+            "emgLawTime" : "2016-05-01",
+            "emgLawLevel" : "国家级",
+            "emgLawContent" : "根据我国 XXXXXXXXXXX"
+        },{
+            "emgLawName" : "中华人民共和国水污染防治法",
+            "emgLawTime" : "2016-05-01",
+            "emgLawLevel" : "国家级",
+            "emgLawContent" : "根据我国 XXXXXXXXXXX"
+        },{
+            "emgLawName" : "中华人民共和国水污染防治法",
+            "emgLawTime" : "2016-05-01",
+            "emgLawLevel" : "国家级",
+            "emgLawContent" : "根据我国 XXXXXXXXXXX"
+        },{
+            "emgLawName" : "中华人民共和国水污染防治法",
+            "emgLawTime" : "2016-05-01",
+            "emgLawLevel" : "国家级",
+            "emgLawContent" : "根据我国 XXXXXXXXXXX"
+        },{
+            "emgLawName" : "中华人民共和国水污染防治法",
+            "emgLawTime" : "2016-05-01",
+            "emgLawLevel" : "国家级",
+            "emgLawContent" : "根据我国 XXXXXXXXXXX"
+        },{
+            "emgLawName" : "中华人民共和国水污染防治法",
+            "emgLawTime" : "2016-05-01",
+            "emgLawLevel" : "国家级",
+            "emgLawContent" : "根据我国 XXXXXXXXXXX"
+        },{
+            "emgLawName" : "中华人民共和国水污染防治法",
+            "emgLawTime" : "2016-05-01",
+            "emgLawLevel" : "国家级",
+            "emgLawContent" : "根据我国 XXXXXXXXXXX"
+        },{
+            "emgLawName" : "中华人民共和国水污染防治法",
+            "emgLawTime" : "2016-05-01",
+            "emgLawLevel" : "国家级",
+            "emgLawContent" : "根据我国 XXXXXXXXXXX"
+        },{
+            "emgLawName" : "中华人民共和国水污染防治法",
+            "emgLawTime" : "2016-05-01",
+            "emgLawLevel" : "国家级",
+            "emgLawContent" : "根据我国 XXXXXXXXXXX"
+        },{
+            "emgLawName" : "中华人民共和国水污染防治法",
+            "emgLawTime" : "2016-05-01",
+            "emgLawLevel" : "国家级",
+            "emgLawContent" : "根据我国 XXXXXXXXXXX"
+        },{
+            "emgLawName" : "中华人民共和国水污染防治法",
+            "emgLawTime" : "2016-05-01",
+            "emgLawLevel" : "国家级",
+            "emgLawContent" : "根据我国 XXXXXXXXXXX"
+        },{
+            "emgLawName" : "中华人民共和国水污染防治法",
+            "emgLawTime" : "2016-05-01",
+            "emgLawLevel" : "国家级",
+            "emgLawContent" : "根据我国 XXXXXXXXXXX"
+        },{
+            "emgLawName" : "中华人民共和国水污染防治法",
+            "emgLawTime" : "2016-05-01",
+            "emgLawLevel" : "国家级",
+            "emgLawContent" : "根据我国 XXXXXXXXXXX"
+        },{
+            "emgLawName" : "中华人民共和国水污染防治法",
+            "emgLawTime" : "2016-05-01",
+            "emgLawLevel" : "国家级",
+            "emgLawContent" : "根据我国 XXXXXXXXXXX"
+        }]
+    };    
+    // 动作执行
+    window.main = {
+        //初始化函数
+        init: function() {
+            var self = this;
+            //执行
+            self.droploadFnc();
+            self.searchFnc();
+        },
+        //滑动加载DOM 
+        droploadFnc: function() {
+                var counter = 0;
+                //每页展示10条数据
+                var num = 10;
+                var pageStart = 0,
+                    pageEnd = 0;
+                $('.content').dropload({
+                    scrollArea: window,
+                    domDown: {
+                        domClass: 'dropload-down',
+                        domRefresh: '<div class="dropload-refresh">↑上拉加载更多-啦啦啦</div>',
+                        domload: '<div class="dropload-load"><span class="loading"></span>加载中-等等等...</div>',
+                        domNoData: '<div class="dropload-noData">暂无数据-no no no</div>'
+                    },
+                    loadDownFn: function(me) {
+                        create(data);
+                        function create(data) {
+                            var result = '';
+                            counter++;
+                            pageEnd = num * counter;
+                            pageStart = pageEnd - num;
+                            for (var i = pageStart; i < pageEnd; i++) {
+                                result += '<li><span class="list list2">' + data.goodsList[i].emgLawName + '</span><br><span class = "time">' + data.goodsList[i].emgLawLevel + '</span><br><span>' + data.goodsList[i].emgLawTime + '</span></li>';
+                                if ((i + 1) >= data.goodsList.length) {
+                                    // 锁定
+                                    me.lock();
+                                    // 无数据
+                                    me.noData();
+                                    break;
+                                }
+                            }
+                            // 这里可以延时加载
+
+                            setTimeout(function() {
+                                    $('#list').append(result);
+                                    // 每次数据加载完，必须重置
+                                    me.resetload();
+                                }, 1000)
+                                /*
+                                $('#list').append(result);
+                                // 每次数据加载完，必须重置
+                                me.resetload();
+                                */
+                        }
+                    },
+                    threshold: 50
+                });
+        },
+        //搜索框
+        searchFnc: function() {
+                $('#list').on('touchend', '#list li', function() {
+                    alert('触摸事件');
+                });
+                $('#search').bind('focus', function() {
+                    $(this).css('text-align', 'left');
+                })
+                $('#search').bind('blur', function() {
+                    $(this).css('text-align', 'center')
+                })
+                $('#search').bind('keyup', function() {
+                    $('#list li').hide()
+                        .filter(":contains('" + $('#search').val() + "')").show();
+                })
+        }
+    }
+    // 定义发送数据
+    window.setData = function(url, param, type) {
+        //HostApp.setDataInfo(url, param, type);
+    }
+    // 定义接收数据
+    window.sendToJs = function(option) {
+        data = JSON.parse(option);
+        alert(data.result);
+        // 调用
+
+    }
+    // 调用发送数据函数
+    setTimeout(function() {
+        setData('http://www.jsywsz.com/WebCityCrisis/getREmgerCase.do', '', 3);
+    }, 1000);
+    main.init();
+    </script>
+</body>
+
+</html>

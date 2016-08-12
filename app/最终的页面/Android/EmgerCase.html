@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>预案库</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <script src="zepto.js"></script>
+    <script src="dropload.min.js"></script>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    .dropload-noData{
+        text-align: center;
+        padding: 5px 0 10px 0;
+    }
+    body {
+        font-size: 14px;
+    }
+    
+    .search {
+        padding: 10px 5px;
+        text-align:center;
+    }
+    
+    .search input {
+        border: 1px solid #aaa;
+        height: 30px;
+        width: 90%;
+        border-radius: 5px;
+        text-indent: 5px;
+    }
+    
+    a {
+        text-decoration: none;
+    }
+    
+    li {
+        list-style: none;
+        border-bottom: 1px solid #aaa;
+        padding: 10px 10px;
+        position: relative;
+        padding: 10px 0px 10px 35px;
+        background: url('tubiao.png') no-repeat 10px 40px;
+    }
+    
+    .list {
+        display: inline-block;
+        margin-left: 20px;
+    }
+    
+    .list1 {
+        padding: 10px 0;
+    }
+    
+    .list2 {
+        padding: 0 0 10px 0;
+    }
+        .dropload-noData{
+        text-align: center;
+        padding: 10px 0 10px 0;
+        }
+        .dropload-load{
+        text-align: center;
+        padding: 10px 0 10px 0;
+        }
+        .dropload-refresh{
+        text-align: center;
+        padding: 10px 0 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="search">
+        <input style="text-align:center" type="search" results="s" placeholder="搜索" id="search" />
+    </div>
+    <div class="content">
+        <ul id="list">
+        </ul>
+    </div>
+    <script>
+    // 定义变量
+    var data;
+    // 定义跳转函数
+    function open(options) {
+        HostApp.alert(2,options);
+    }
+    // 定义发送数据函数
+    function setDataInfo(url) {
+        HostApp.toast(url);
+    }
+    // 定义main
+    var main = {
+        // 初始化
+        init: function() {
+            var self = this;
+            self.createDomFirst(data);
+            if(data.goodsList.length > 10) {
+                self.dropLoadFnc();
+            };
+            self.searchFnc();
+            self.cancelFocus();
+        },
+        // 滑动取消焦点
+        cancelFocus : function(){
+            $(document).on('scroll',function(){
+                $('#search').blur();
+            })
+        },
+        // 第一次渲染DOM
+        createDomFirst: function() {
+            var str = '';
+            var m = data.goodsList.length > 10 ? 10 : data.goodsList.length;
+            for (var i = 0; i < m; i++) {
+                str += '<li><span class="list list1">' + data.goodsList[i].caseName + '</span><br><a class = "list list2" href = "javascript:;">' + data.goodsList[i].caseFile + '</a><br><span class = "list list3">' + data.goodsList[i].caseTime + '</span></li>';
+            }
+            $('#list').append(str);
+        },
+        // 定义滑动加载
+        dropLoadFnc: function() {
+            //下拉分条请求数据
+            var counter = 1;
+            //每页展示10条数据
+            var num = 10;
+            var pageStart = 10,
+                pageEnd = 0;
+            $('.content').dropload({
+                scrollArea: window,
+                domDown: {
+                    domClass: 'dropload-down',
+                    domRefresh: '<div class = "dropload-refresh"></div>',
+                    domload: '<div class = "dropload-load"><span class = "loading"></span>加载中...</div>',
+                    domNoData: '<div class = "dropload-noData">没有更多内容</div>'
+                },
+                loadDownFn: function(me) {
+                    createDom(data);
+
+                    function createDom(data) {
+                        var result = '';
+                        counter++;
+                        pageEnd = num * counter;
+                        pageStart = pageEnd - num;
+                        for (var i = pageStart; i < pageEnd; i++) {
+                            result += '<li><span class="list list1">' + data.goodsList[i].caseName + '</span><br><a class = "list list2" href = "javascript:;">' + data.goodsList[i].caseFile + '</a><br><span class = "list list3">' + data.goodsList[i].caseTime + '</span></li>';
+                            if ((i + 1) >= data.goodsList.length) {
+                                // 锁定
+                                me.lock();
+                                // 无数据
+                                me.noData();
+                                break;
+                            }
+                        }
+                        // 这里可以延时加载
+                        setTimeout(function() {
+                            $('#list').append(result);
+                            // 每次数据加载完，必须重置
+                            me.resetload();
+                        }, 500)
+                    }
+                }
+            })
+        },
+        // 定义搜索样式及本地搜索功能
+        searchFnc: function() {
+            $('#list').on('tap', '#list li', function() {
+                var index = $(this).index();
+                var str1 = data.goodsList[index].caseName;
+                var url = 'http://www.jsywsz.com/WebCityCrisis/jsp/emgdoc/' + str1 + '.htm';
+                open(url);
+            })
+            $('#search').on('focus', function() {
+                $(this).css('text-align', 'left');
+            })
+            $('#search').on('blur', function() {
+                $(this).css('text-align', 'center');
+            })
+            $('#search').on('keyup', function() {
+                $('#list li').hide();
+                var str = $(this).val();
+                str = str.replace(/\s/, '');
+                var reg = eval('/' + str + '/g');
+                $('#list li').each(function(index, ele) {
+                    var str1 = $(ele).text();
+                    if (str1.search(reg) != -1) {
+                        $(ele).show();
+                    }
+                })
+            })
+        }
+    };
+    function getData(data) {
+        window.data = JSON.parse(data);
+        // 初始化
+        main.init();
+    };
+    // 等待注入时间   
+    setTimeout(function() {
+        setDataInfo('http://www.jsywsz.com/WebCityCrisis/getREmgerCase.do');
+    }, 500);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>预案库</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <script src="scripts/doT.js"></script>
+    <script src="scripts/zepto.js"></script>
+    <script src="scripts/Ddropload.js"></script>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }   
+    body {
+        font-size: 14px;
+    }   
+    .search {
+        padding: 10px 5px;
+    }   
+    .search input {
+        border: 1px solid #aaa;
+        height: 40px;
+        width: 100%;
+        border-radius: 10px;
+    }    
+    a {
+        text-decoration: none;
+    }   
+    li {
+        list-style: none;
+        border-bottom: 1px solid #aaa;
+        padding: 10px 10px;
+        position: relative;
+        padding: 10px 0px 10px 35px;
+        background: url('images/图标.png') no-repeat 10px 40px;
+    }
+    .list {
+        display: inline-block;
+        margin-left: 20px;
+    }  
+    .list1 {
+        padding: 10px 0;
+    }   
+    .list2 {
+        font-size: 12px;
+    }       
+    .time {
+        margin-left: 20px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="search">
+        <input style="text-align:center" type="search" results="s" placeholder="搜索" id="search" />
+    </div>
+    <div class="content">
+        <ul id="list">
+        </ul>
+        <ul id="list_s">
+        </ul>
+    </div>
+    <script>
+    // 模拟HostAPP方法及数据
+    var HostApp = {};
+    HostApp.setDataInfo = function(url, param, callBack) {
+            var data1 = {
+                "goodsList": [{
+                    "caseName": "青云山假设工程事故应急预案",
+                    "caseTime": "2016-05-01",
+                    "caseFile": "XXX预案.pdf"
+                }, {
+                    "caseName": "栖霞区假设工程事故应急预案",
+                    "caseTime": "2016-05-01",
+                    "caseFile": "XXX预案.pdf"
+                }, {
+                    "caseName": "栖霞区假设工程事故应急预案",
+                    "caseTime": "2016-05-01",
+                    "caseFile": "XXX预案.pdf"
+                }, {
+                    "caseName": "栖霞区假设工程事故应急预案",
+                    "caseTime": "2016-05-01",
+                    "caseFile": "XXX预案.pdf"
+                },{
+                    "caseName": "栖霞区假设工程事故应急预案",
+                    "caseTime": "2016-05-01",
+                    "caseFile": "XXX预案.pdf"
+                },{
+                    "caseName": "栖霞区假设工程事故应急预案",
+                    "caseTime": "2016-05-01",
+                    "caseFile": "XXX预案.pdf"
+                },{
+                    "caseName": "栖霞区假设工程事故应急预案",
+                    "caseTime": "2016-05-01",
+                    "caseFile": "XXX预案.pdf"
+                },{
+                    "caseName": "栖霞区假设工程事故应急预案",
+                    "caseTime": "2016-05-01",
+                    "caseFile": "XXX预案.pdf"
+                },{
+                    "caseName": "栖霞区假设工程事故应急预案",
+                    "caseTime": "2016-05-01",
+                    "caseFile": "XXX预案.pdf"
+                },{
+                    "caseName": "栖霞区假设工程事故应急预案",
+                    "caseTime": "2016-05-01",
+                    "caseFile": "XXX预案.pdf"
+                },{
+                    "caseName": "栖霞区假设工程事故应急预案",
+                    "caseTime": "2016-05-01",
+                    "caseFile": "XXX预案.pdf"
+                },{
+                    "caseName": "栖霞区假设工程事故应急预案",
+                    "caseTime": "2016-05-01",
+                    "caseFile": "XXX预案.pdf"
+                }]
+            };
+            var data2 = {
+                    "goodsList": [{
+                        "caseName": "青云山假设工程事故应急预案",
+                        "caseTime": "2016-05-01",
+                        "caseFile": "XXX预案.pdf"
+                    }]
+                }
+                // 返回滑动数据
+            if (param === 1) {
+                // 回调函数只用于传参数
+                callBack(data1)
+            }
+            // 返回搜索数据
+            if (param === 2) {
+                callBack(data2);
+            }
+        }
+        // main
+    window.main = {
+            init: function() {
+                var self = this;
+                //执行
+                self.droploadFnc();
+                self.searchFnc();
+                self.createSearch();
+            },
+            // 滑动加载DOM 
+            droploadFnc: function() {
+                $('.content').dropload({
+                    scrollArea: window,
+                    domDown: {
+                        domClass: 'dropload-down',
+                        domRefresh: '<div class="dropload-refresh">↑上拉加载更多-啦啦啦</div>',
+                        domload: '<div class="dropload-load"><span class="loading"></span>加载中-等等等...</div>',
+                        domNoData: '<div class="dropload-noData"></div>'
+                    },
+                    loadDownFn: function(me) {
+                        HostApp.setDataInfo('http://www.jsywsz.com/WebCityCrisis/getREmgerCase.do', 1, function(data) {
+                            var data = data;
+                            console.log('调用了滑动');
+                            main.createDrop(data, me);
+                        })
+                    },
+                    threshold: 30
+                });
+            },
+            // 滑动渲染
+            createDrop: function(data, me) {
+                console.log('调用了滑动执行函数');
+                var result = '';
+                for (var i = 0; i < data.goodsList.length; i++) {
+                    result += '<li><span class="list list1">' + data.goodsList[i].caseName + '</span><br><a class = "list list2" href = "javascript:;">' + data.goodsList[i].caseFile + '</a><br><span class = "list list3">' + data.goodsList[i].caseTime + '</span></li>';
+                    if ((i + 1) >= data.goodsList.length) {
+                        // 锁定
+                        me.lock();
+                        // 无数据
+                        me.noData();
+                        break;
+                    }
+                }
+                // 这里可以延时加载
+
+                setTimeout(function() {
+                        $('#list').append(result);
+                        // 每次数据加载完，必须重置
+                        me.resetload();
+                    }, 1000)
+                    /*
+                    $('#list').append(result);
+                    // 每次数据加载完，必须重置
+                    me.resetload();
+                    */
+            },
+            // 搜索渲染
+            createSearch: function(data) {
+                $('#search').on('keyup', function() {
+                    // 取得文本长度
+                    var lgh = $('#search').val().length;
+                    if (lgh > 0) {
+                        // 调用接口
+                        $('#list').hide();
+                        HostApp.setDataInfo('http://www.jsywsz.com/WebCityCrisis/getREmgerCase.do', 0, function(data) {
+                            // 隐藏之前的li
+                            // 拼接并显示搜索数据
+                            var result = '';
+                            for (var i = 0; i < data.goodsList.length; i++) {
+                                result += '<li><span class="list list1">' + data.goodsList[i].caseName + '</span><br><a class = "list list2" href = "javascript:;">' + data.goodsList[i].caseFile + '</a><br><span class = "list list3">' + data.goodsList[i].caseTime + '</span></li>';
+                            }
+                            $('#list_s').append(result);
+                        });
+                    } else {
+                        $('#list_s').html('');
+                        $('#list').show();
+                    }
+                })
+            },
+            // 搜索框样式
+            searchFnc: function() {
+                $('#list').on('touchend', '#list li a', function() {
+                    alert('触摸事件');
+                });
+                $('#search').on('focus', function() {
+                    $(this).css('text-align', 'left');
+                })
+                $('#search').on('blur', function() {
+                    $(this).css('text-align', 'center');
+                })
+            }
+        }
+        // 初始化
+    main.init();
+    /*
+    // 页面加载初始加载数据10条
+    HostApp.setDataInfo('http://www.jsywsz.com/WebCityCrisis/getREmgerCase.do', 'page=1,size=10', function(data) {
+        main.initCreate();
+    })
+    */
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>应急物资</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <script src="scripts/doT.js"></script>
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/dropload.min.js"></script>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }  
+    body {
+        font-size: 10px;
+    }    
+    header {
+        text-align: center;
+        background-color: #428bca;
+        color: #fff;
+        padding: 10px 0;
+        font-size: 20px;
+    }   
+    .search {
+        padding: 10px 5px;
+    }  
+    .search input {
+        border: 1px solid #aaa;
+        height: 30px;
+        width: 100%;
+    }    
+    li {
+        list-style: none;
+        border-bottom: 1px solid #aaa;
+        padding: 10px 10px;
+        position: relative;
+        padding: 10px 0px 10px 35px;
+        background: url('images/图标.png') no-repeat 0 20px;
+    }    
+    li .name {
+        font-size: 14px;
+        padding: 10px 0px;
+        display: inline-block;
+        font-weight: 600;
+    }   
+    li .num {
+        position: absolute;
+        left: 150px;
+        top: 20px;
+    }    
+    li span {
+        font-size: 14px;
+    }   
+    ul {
+        padding: 10px 5px;
+    }    
+    </style>
+</head>
+
+<body>
+    <header>
+        <h3>应急物资</h3>
+    </header>
+    <div class="search">
+        <input style="text-align:center" type="search" results="s" placeholder="搜索" id="search" />
+    </div>
+    <div class="content">
+        <ul id="list">
+            <script id="template_list" type="text/template" charset="utf-8">
+                {{if(it && it.length>0){ }} {{for(var i = 0; i
+                < 3; i++){ }}<li><span class="name">{{=it[i].name}}</span><span class="num">数量：{{=it[i].num}}</span>
+                    <br/><span>储藏点位置：</span><span class="place">{{=it[i].place}}</span></li>{{ } }} {{ }else{ }}
+                    <li>没有数据</li>{{ } }}
+            </script>
+        </ul>
+    </div>
+    <script src = "scripts/Agoodslist.js"></script>
+</body>
+
+</html>

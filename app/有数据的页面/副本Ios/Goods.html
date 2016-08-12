@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>应急物资</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <script src="scripts/zepto.js"></script>
+    <script src="scripts/dropload.min.js"></script>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    body {
+        font-size: 10px;
+    }
+    
+    header {
+        text-align: center;
+        background-color: #428bca;
+        color: #fff;
+        padding: 10px 0;
+        font-size: 20px;
+    }
+    
+    .search {
+        padding: 10px 5px;
+    }
+    
+    .search input {
+        border: 1px solid #aaa;
+        height: 30px;
+        width: 100%;
+    }
+    
+    li {
+        list-style: none;
+        border-bottom: 1px solid #aaa;
+        padding: 10px 10px;
+        position: relative;
+        padding: 10px 0px 10px 35px;
+        background: url('images/图标.png') no-repeat 0 20px;
+    }
+    
+    li .name {
+        font-size: 14px;
+        padding: 10px 0px;
+        display: inline-block;
+        font-weight: 600;
+    }
+    
+    li .num {
+        position: absolute;
+        left: 150px;
+        top: 20px;
+    }
+    
+    li span {
+        font-size: 14px;
+    }
+    
+    ul {
+        padding: 10px 5px;
+    }
+    
+    footer {
+        width: 100%;
+        color: #fff;
+        padding: 10px 0;
+        vertical-align: middle;
+        text-align: center;
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        background: #428bca;
+        font-size: 16px;
+    }
+    
+    footer span {
+        flex: 1;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="search">
+        <input style="text-align:center" type="search" results="s" placeholder="搜索" id="search" />
+    </div>
+    <div class="content">
+        <ul id="list">
+        </ul>
+        <ul id="list_s">
+        </ul>
+    </div>
+    <script>
+    var data;
+
+    var data = {
+        "result": "success",
+        "goodsList": [{
+            "goodsName": "尧化门物资点",
+            "goodsBelong": "尧化街道",
+            "goodsAddress": "尧化街道118号",
+            "goodsConn": "小吴",
+            "goodsPhone": "13812536201",
+            "goodsDetail": ""
+        }, {
+            "goodsName": "尧化门物资点",
+            "goodsBelong": "尧化街道",
+            "goodsAddress": "尧化街道118号",
+            "goodsConn": "小明",
+            "goodsPhone": "13812536201",
+            "goodsDetail": ""
+        }, {
+            "goodsName": "尧化门物资点",
+            "goodsBelong": "尧化街道",
+            "goodsAddress": "尧化街道118号",
+            "goodsConn": "小强",
+            "goodsPhone": "13812536201",
+            "goodsDetail": ""
+        }, {
+            "goodsName": "尧化门物资点",
+            "goodsBelong": "尧化街道",
+            "goodsAddress": "尧化街道118号",
+            "goodsConn": "小张",
+            "goodsPhone": "13812536201",
+            "goodsDetail": ""
+        }, {
+            "goodsName": "尧化门物资点",
+            "goodsBelong": "尧化街道",
+            "goodsAddress": "尧化街道118号",
+            "goodsConn": "小凡",
+            "goodsPhone": "13812536201",
+            "goodsDetail": ""
+        }, {
+            "goodsName": "尧化门物资点",
+            "goodsBelong": "尧化街道",
+            "goodsAddress": "尧化街道118号",
+            "goodsConn": "小吴",
+            "goodsPhone": "13812536201",
+            "goodsDetail": ""
+        }, {
+            "goodsName": "尧化门物资点",
+            "goodsBelong": "尧化街道",
+            "goodsAddress": "尧化街道118号",
+            "goodsConn": "小吴",
+            "goodsPhone": "13812536201",
+            "goodsDetail": ""
+        }, {
+            "goodsName": "尧化门物资点",
+            "goodsBelong": "尧化街道",
+            "goodsAddress": "尧化街道118号",
+            "goodsConn": "小吴",
+            "goodsPhone": "13812536201",
+            "goodsDetail": ""
+        }, {
+            "goodsName": "尧化门物资点",
+            "goodsBelong": "尧化街道",
+            "goodsAddress": "尧化街道118号",
+            "goodsConn": "小吴",
+            "goodsPhone": "13812536201",
+            "goodsDetail": ""
+        }, {
+            "goodsName": "尧化门物资点",
+            "goodsBelong": "尧化街道",
+            "goodsAddress": "尧化街道118号",
+            "goodsConn": "小吴",
+            "goodsPhone": "13812536201",
+            "goodsDetail": ""
+        }, {
+            "goodsName": "尧化门物资点",
+            "goodsBelong": "尧化街道",
+            "goodsAddress": "尧化街道118号",
+            "goodsConn": "小吴",
+            "goodsPhone": "13812536201",
+            "goodsDetail": ""
+        }, {
+            "goodsName": "尧化门物资点",
+            "goodsBelong": "尧化街道",
+            "goodsAddress": "尧化街道118号",
+            "goodsConn": "天天",
+            "goodsPhone": "13812536201",
+            "goodsDetail": ""
+        }, {
+            "goodsName": "尧化门物资点",
+            "goodsBelong": "尧化街道",
+            "goodsAddress": "尧化街道118号",
+            "goodsConn": "云云",
+            "goodsPhone": "13812536201",
+            "goodsDetail": ""
+        }, {
+            "goodsName": "尧化门物资点",
+            "goodsBelong": "尧化街道",
+            "goodsAddress": "尧化街道118号",
+            "goodsConn": "风风",
+            "goodsPhone": "13812536201",
+            "goodsDetail": ""
+        }, {
+            "goodsName": "尧化门物资点",
+            "goodsBelong": "尧化街道",
+            "goodsAddress": "尧化街道118号",
+            "goodsConn": "明明",
+            "goodsPhone": "13812536201",
+            "goodsDetail": ""
+        }]
+    }
+
+    window.sendData = function(url) {
+        HostApp.toast(url);
+    };
+    window.getData = function(data) {
+        alert('接收到了');
+        data = JSON.parse(data);
+    };
+    /*
+    // 等待注入时间
+    setTimeout(function() {
+        sendData('http://www.jsywsz.com/WebCityCrisis/getREmgerCase.do')
+    }, 1);
+    */
+    // 定义main
+    var main = {
+        // 初始化
+        init: function() {
+            var self = this;
+            self.dropLoadFnc();
+            self.searchFnc();
+        },
+        // 定义发送数据
+        sendData: function(url) {
+            HostApp.toast(url);
+        },
+        // 定义滑动加载
+        dropLoadFnc: function() {
+            //下拉分条请求数据
+            var counter = 0;
+            //每页展示10条数据
+            var num = 10;
+            var pageStart = 0,
+                pageEnd = 0;
+            $('.content').dropload({
+                scrollArea: window,
+                domDown: {
+                    domClass: 'dropload-down',
+                    domRefresh: '<div class = "dropload-refresh">上啦滑动加载</div>',
+                    domload: '<div class = "dropload-load"><span class = "loading"></span>加载中...</div>',
+                    domNoData: '<div class = "dropload-noData">没有更多内容</div>'
+                },
+                loadDownFn: function(me) {
+                    createDom(data);
+
+                    function createDom(data) {
+                        var result = '';
+                        counter++;
+                        pageEnd = num * counter;
+                        pageStart = pageEnd - num;
+                        for (var i = pageStart; i < pageEnd; i++) {
+                            result += '<li><div class="list list1"><span class = "list11">' + data.goodsList[i].goodsName + '</span><span class="list12">' + data.goodsList[i].goodsBelong + '</span></div><div class = "list list2"><span class = "list21">' + data.goodsList[i].goodsConn + '</span><span class="list22">' + data.goodsList[i].goodsPhone + '</span></div><div class = "list list3">' + data.goodsList[i].goodsAddress + '</div></li>';
+                            if ((i + 1) >= data.goodsList.length) {
+                                // 锁定
+                                me.lock();
+                                // 无数据
+                                me.noData();
+                                break;
+                            }
+                        }
+                        // 这里可以延时加载
+                        setTimeout(function() {
+                            $('#list').append(result);
+                            // 每次数据加载完，必须重置
+                            me.resetload();
+                        }, 500)
+                    }
+                }
+            })
+        },
+        // 定义搜索样式及本地搜索功能
+        searchFnc: function() {
+            $('#search').on('focus', function() {
+                $(this).css('text-align', 'left');
+            })
+            $('#search').on('blur', function() {
+                $(this).css('text-align', 'center');
+            })
+            $('#search').on('keyup', function() {
+                $('#list').hide();
+                var str = $(this).val();
+                str = str.replace(/\s/, '');
+                var reg = eval('/' + str + '/g');
+                for(var i = 0; i < data.goodsList.length; i++){
+                    data.
+                }
+
+
+
+
+                $('#list li').each(function(index, ele) {
+                    var str1 = $(ele).text();
+                    if (str1.search(reg) != -1) {
+                        $(ele).show();
+                    }
+                })
+            })
+        }
+    };
+    // 初始化
+    main.init();
+    </script>
+</body>
+
+</html>

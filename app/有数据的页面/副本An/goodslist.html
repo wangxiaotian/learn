@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>应急物资</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <script src = "scripts/zepto.js"></script>
+    <script src="scripts/doT.js"></script>
+    <script src="scripts/dropload.js"></script>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    body {
+        font-size: 10px;
+    }
+    
+    header {
+        text-align: center;
+        background-color: #428bca;
+        color: #fff;
+        padding: 10px 0;
+        font-size: 20px;
+    }
+    
+    .search {
+        padding: 10px 5px;
+    }
+    
+    .search input {
+        border: 1px solid #aaa;
+        height: 30px;
+        width: 100%;
+    }
+    
+    li {
+        list-style: none;
+        border-bottom: 1px solid #aaa;
+        padding: 10px 10px;
+        position: relative;
+        padding: 10px 0px 10px 35px;
+        background: url('images/图标.png') no-repeat 0 20px;
+    }
+    
+    li .name {
+        font-size: 14px;
+        padding: 10px 0px;
+        display: inline-block;
+        font-weight: 600;
+    }
+    
+    li .num {
+        position: absolute;
+        left: 150px;
+        top: 20px;
+    }
+    
+    li span {
+        font-size: 14px;
+    }
+    
+    ul {
+        padding: 10px 5px;
+    }
+    
+    footer {
+        width: 100%;
+        color: #fff;
+        padding: 10px 0;
+        vertical-align: middle;
+        text-align: center;
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        background: #428bca;
+        font-size: 16px;
+    }
+    
+    footer span {
+        flex: 1;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="search">
+        <input style="text-align:center" type="search" results="s" placeholder="搜索" id="search" />
+    </div>
+    <div class="content">
+        <ul id="list">
+            <script id="template_list" type="text/template" charset="utf-8">
+                {{if(it && it.length>0){ }} {{for(var i = 0; i
+                < 3; i++){ }}<li><span class="name">{{=it[i].name}}</span><span class="num">数量：{{=it[i].num}}</span>
+                    <br/><span>储藏点位置：</span><span class="place">{{=it[i].place}}</span></li>{{ } }} {{ }else{ }}
+                    <li>没有数据</li>{{ } }}
+            </script>
+        </ul>
+    </div>
+    <footer style="display:none">
+        <span>通讯录</span>
+        <span>应急信息</span>
+        <span>应急GIS</span>
+        <span>应急知识</span>
+    </footer>
+    <script>
+    $(function() {
+        //页面加载完成第一次请求数据
+    	$.ajax({
+    		type:'GET',
+            url:'json/json1.json',
+            dataType:'json',
+            success:function(data){
+            	var template = document.getElementById('template_list').innerHTML;
+                document.getElementById('list').innerHTML = doT.template(template)(data.lists);
+            }
+    	})
+
+        //下拉分条请求数据
+        var counter = 0;
+        //每页展示10条数据
+        var num = 3;
+        var pageStart = 0,
+            pageEnd = 0;
+        //dropload
+        $('.content').dropload({
+            scrollArea : window,
+            domDown : {
+                domClass : 'dropload-down',
+                domRefresh : '<div class="dropload-refresh">↑上拉加载更多-啦啦啦</div>',
+                domload : '<div class="dropload-load"><span class="loading"></span>加载中-等等等...</div>',
+                domNoData : '<div class="dropload-noData">暂无数据-no no no</div>'
+            },
+            loadDownFn : function(me){
+                $.ajax({
+                    type : 'GET',
+                    url : 'json/json1.json',
+                    dataType : 'json',
+                    success : function(data){
+                        var result = '';
+                        counter++;
+                        pageEnd = num*counter;
+                        pageStart = pageEnd - num;
+                        for(var i = pageStart; i < pageEnd; i++){
+                            result += '<li><span class="name">' + data.lists[i].name + '</span><span class="num">数量：' + data.lists[i].num + '</span><br/><span>储藏点位置：</span><span class="place">' + data.lists[i].place + '</span></li>';
+                            if((i + 1) >= data.lists.length){
+                                // 锁定
+                                me.lock();
+                                // 无数据
+                                me.noData();
+                                break;
+                            }
+                        }
+                        // 这里可以延时加载
+                        setTimeout(function(){
+                            $('#list').append(result);
+                            // 每次数据加载完，必须重置
+                            me.resetload();
+                        },1000)   
+                    },
+                    error : function(xhr,type){
+                        alert('Ajax error!');
+                        //加载出错，也要重置
+                        me.resetload();
+                    }
+                });
+            },
+            threshold : 50
+        })
+
+        //输入框的搜索样式
+        var ALi = document.getElementsByTagName('li');
+        for (var i = 0; i < ALi.length; i++) {
+            ALi[i].onclick = function() {
+                alert("你点击了列表")
+            }
+        }
+        $('#search').on('focus', function() {
+            $(this).css('text-align', 'left')
+        })
+        $('#search').on('blur', function() {
+            $(this).css('text-align', 'center')
+        })
+
+        //搜索功能
+        $('#search').on('keyup', function() {
+            $('#list li').hide()
+                .filter(":contains('" + $(this).val() + "')").show();
+
+        })
+    })
+    </script>
+</body>
+
+</html>

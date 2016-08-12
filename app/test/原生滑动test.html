@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>滑动测试</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+	<script src = "scripts/zepto.js"></script>
+	<script src = "scripts/touch.js"></script>
+	<style>
+		li{
+			padding:10px 10px;
+			border-bottom:1px solid #aaa;
+		}
+	</style>
+</head>
+<body>
+	<ul>
+		<li>你好</li>
+		<li>你好</li>
+		<li>你好</li>
+		<li>你好</li>
+		<li>你好</li>
+		<li>你好</li>
+		<li>你好</li>
+		<li>你好</li>
+		<li>你好</li>
+		<li>你好</li>
+		<li>你好</li>
+		<li>你好</li>
+		<li>你好</li>
+		<li>你好</li>
+		<li>你好</li>
+		<li>你好</li>
+		<li>你好</li>
+		<li>你好</li>
+		<li>你好</li>
+		<li>你好</li>
+		<li>你好</li>
+		<li>你好</li>
+		<li>你好</li>
+		<li>你好</li>
+		<li>你好</li>
+		<li>你好</li>
+		<li>你好</li>
+		<li>你好</li>
+		<li>你好</li>
+		<li>你好</li>
+		<li>你好</li>
+		<li>你好</li>
+		<li>你好</li>
+		<li>你好</li>
+		<li>你好</li>
+	</ul>
+	<script>
+	window.onload = function(){
+		$('body').swipe(function(){
+			alert('滑动');
+		});
+		$('ul li').tap(function(){
+			alert('触及')
+		})
+	}
+		
+	</script>
+</body>
+</html>

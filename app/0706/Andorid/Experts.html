@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>专家库</title>
+    <meta name="viewport" content="width=device-width,inintial-scale=1,user-scalable=no">
+    <script src="scripts/zepto.js"></script>
+    <script src="scripts/dropload.min.js"></script>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    body {
+        font-size: 14px;
+        background: #eee;
+    }
+    
+    header {
+        text-align: center;
+        background-color: #428bca;
+        color: #fff;
+        padding: 10px 0;
+        font-size: 20px;
+    }
+    
+    .search {
+        padding: 10px 5px;
+    }
+    
+    .search input {
+        border: 1px solid #aaa;
+        height: 30px;
+        width: 100%;
+    }
+    
+    img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .item {
+        border-bottom: 1px solid #ccc;
+        display: flex;
+        background: #fff;
+        margin-bottom: 10px;
+    }
+    
+    .item1 {
+        flex: 1;
+        padding: 10px;
+    }
+    
+    .item2 {
+        flex: 4;
+    }
+    
+    .item2a,
+    .item2b {
+        display: flex;
+    }
+    
+    .item2a {
+        padding: 10px 0 5px 0;
+    }
+    
+    .item2b {
+        padding: 5px 0 10px 0;
+    }
+    
+    .phone {
+        padding: 0;
+    }
+    
+    .name {
+        flex: 1;
+    }
+    
+    .field {
+        flex: 1;
+    }
+    
+    .job {
+        flex: 2;
+    }
+    
+    .unit {
+        flex: 1;
+    }
+    </style>
+    <script src="scripts/doT.js"></script>
+    <script src="scripts/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="search">
+        <input style="text-align:center" id="search" type="search" results="s" class="inp" placeholder="搜索" />
+    </div>
+    <div class="content">
+        <ul id="list"></ul>
+    </div>
+    <script>
+    (function() {
+        var data;
+        // 定义跳转函数
+        function open(options) {
+            HostApp.alert(options);
+        };
+        window.sendData = function(url) {
+            HostApp.toast(url);
+        };
+        window.getData = function(data) {
+            window.data = data;
+        };
+        // 等待注入时间
+        setTimeout(function() {
+            sendData('http://www.jsywsz.com/WebCityCrisis/getRExperts.do')
+        }, 1);
+        // 定义main
+        var main = {
+            // 初始化
+            init: function() {
+                var self = this;
+                self.createDomFirst(data);
+                self.dropLoadFnc();
+                self.searchFnc();
+            },
+            // 第一次渲染DOM
+            createDomFirst: function(data) {
+                var str = '';
+                for (var i = 0; i < 10; i++) {
+                    str += '<li class="item"><div class = "item1"><img src = ""/></div><div class = "item2"><div class = "item2a" ><span class = "name">' + data.goodsList[i].expertName + '</span><span class="job">' + data.goodsList[i].expertGrade + '</span></div><span class = "phone">' + data.goodsList[i].goodsPhone + '</span><div class = "item2b"> <span class = "field">专业领域：' + data.goodsList[i].expertArea + '</span><span class="unit">工作单位：' + data.goodsList[i].expertBelong + '</span></div></div></div>';
+                }
+                $('#list').append(str);
+            },
+            // 定义滑动加载
+            dropLoadFnc: function() {
+                //下拉分条请求数据
+                setTimeout(function() {
+                    var counter = 1;
+                    //每页展示10条数据
+                    var num = 10;
+                    var pageStart = 0,
+                        pageEnd = 0;
+                    $('.content').dropload({
+                        scrollArea: window,
+                        domDown: {
+                            domClass: 'dropload-down',
+                            domRefresh: '<div class = "dropload-refresh">上啦滑动加载</div>',
+                            domload: '<div class = "dropload-load"><span class = "loading"></span>加载中...</div>',
+                            domNoData: '<div class = "dropload-noData">没有更多内容</div>'
+                        },
+                        loadDownFn: function(me) {
+                            createDom(data);
+
+                            function createDom(data) {
+                                var result = '';
+                                counter++;
+                                pageEnd = num * counter;
+                                pageStart = pageEnd - num;
+                                for (var i = pageStart; i < pageEnd; i++) {
+                                    result += '<li class="item"><div class = "item1"><img src = ""/></div><div class = "item2"><div class = "item2a" ><span class = "name">' + data.goodsList[i].expertName + '</span><span class="job">' + data.goodsList[i].expertGrade + '</span></div><span class = "phone">' + data.goodsList[i].goodsPhone + '</span><div class = "item2b"> <span class = "field">专业领域：' + data.goodsList[i].expertArea + '</span><span class="unit">工作单位：' + data.goodsList[i].expertBelong + '</span></div></div></div>';
+                                    if ((i + 1) >= data.goodsList.length) {
+                                        // 锁定
+                                        me.lock();
+                                        // 无数据
+                                        me.noData();
+                                        break;
+                                    }
+                                }
+                                // 这里可以延时加载
+                                setTimeout(function() {
+                                    $('#list').append(result);
+                                    // 每次数据加载完，必须重置
+                                    me.resetload();
+                                }, 500)
+                            }
+                        }
+                    })
+                }, 600)
+
+            },
+            // 定义搜索样式及本地搜索功能
+            searchFnc: function() {
+                $('#list').on('tap', '#list li', function() {
+                    var index = $(this).index();
+                    var url = data.goodsList[i].gUrl;
+                    open(url);
+                })
+                $('#search').on('focus', function() {
+                    $(this).css('text-align', 'left');
+                })
+                $('#search').on('blur', function() {
+                    $(this).css('text-align', 'center');
+                })
+                $('#search').on('keyup', function() {
+                    $('#list li').hide();
+                    var str = $(this).val();
+                    str = str.replace(/\s/, '');
+                    var reg = eval('/' + str + '/g');
+                    $('#list li').each(function(index, ele) {
+                        var str1 = $(ele).text();
+                        if (str1.search(reg) != -1) {
+                            $(ele).show();
+                        }
+                    })
+                })
+            }
+        };
+        // 初始化
+        main.init();
+    })()
+    </script>
+</body>
+
+</html>

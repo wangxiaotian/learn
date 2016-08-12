@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>应急物品详情页面</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <script src="zepto.js"></script>
+    <script src="dropload.min.js"></script>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .dropload-noData {
+        text-align: center;
+        padding: 5px 0 10px 0;
+    }
+    
+    body {
+        font-size: 14px;
+        background: #eee;
+    }
+    
+    .search {
+        padding: 10px 5px 0 5px;
+        text-align:center;
+    }
+    
+    .search input {
+        border: 1px solid #aaa;
+        height: 30px;
+        width: 90%;
+        border-radius: 5px;
+        text-indent: 5px;
+    }
+    
+    li {
+        border-radius: 1px;
+        background: #fff;
+        list-style: none;
+        border-bottom: 1px solid #aaa;
+        position: relative;
+        padding: 10px 20px 5px 20px;
+        margin-top: 10px;
+    }
+    
+    .title {
+        border-bottom: 1px solid #aaa;
+        padding: 10px 20px 10px 20px;
+    }
+    
+    .list {
+        padding: 10px 0;
+        display: flex;
+    }
+    
+    .list2 {
+        border-bottom: 1px solid #aaa;
+    }
+    
+    .list11,
+    .list12,
+    .list21,
+    .list22,
+    .list31 {
+        flex: 1;
+    }
+    
+    .list32 {
+        flex: 4;
+    }
+    
+    .dropload-noData {
+        text-align: center;
+        padding: 10px 0 10px 0;
+    }
+    
+    .dropload-load {
+        text-align: center;
+        padding: 10px 0 10px 0;
+    }
+    
+    .dropload-refresh {
+        text-align: center;
+        padding: 10px 0 10px 0;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="search">
+        <input type="text" id = "search" placeholder="搜索" style = "text-align:center;">
+    </div>
+    <div class="content">
+        <ul id="list"></ul>
+    </div>
+    <script>
+    window.sendData = function(url) {
+        HostApp.toast(url);
+    };
+    var main = {
+        // 初始化
+        init: function() {
+            var self = this;
+            self.createDomFirst(data);
+            if (data.length > 10) {
+                self.dropLoadFnc();
+            };
+            self.searchFnc();
+            self.cancelFocus();
+        },
+        // 滑动取消焦点
+        cancelFocus : function(){
+            $(document).on('scroll',function(){
+                $('#search').blur();
+            })
+        },
+        // 第一次渲染DOM
+        createDomFirst: function() {
+            setTimeout(function() {
+                var str = '';
+                var m = data.length > 10 ? 10 : data.length;
+                for (var i = 0; i < m; i++) {
+                    str += '<li><div class = "list title">' + data[i].gName + '</div>' + '<div class="list list1"><span class = "list11">型号：' + data[i].gModel + '</span><span class="list12">规格：' + data[i].gSpec + '</span></div><div class = "list list2"><span class = "list21">数量：' + data[i].gCount + '</span><span class="list22">状态：' + data[i].gState + '</span></div><div class = "list list3"><span class = "list31">用途：</span><span class = "list32">' + data[i].gUse + '</span></div></li>';
+                }
+                $('#list').append(str);
+            }, 20)
+
+        },
+        // 定义滑动加载
+        dropLoadFnc: function() {
+            //下拉分条请求数据
+            setTimeout(function() {
+                var counter = 1;
+                //每页展示10条数据
+                var num = 10;
+                var pageStart = 0,
+                    pageEnd = 0;
+                $('.content').dropload({
+                    scrollArea: window,
+                    domDown: {
+                        domClass: 'dropload-down',
+                        domRefresh: '<div class = "dropload-refresh"></div>',
+                        domload: '<div class = "dropload-load"><span class = "loading"></span>加载中...</div>',
+                        domNoData: '<div class = "dropload-noData">没有更多内容</div>'
+                    },
+                    loadDownFn: function(me) {
+                        createDom(data);
+
+                        function createDom(data) {
+                            var result = '';
+                            counter++;
+                            pageEnd = num * counter;
+                            pageStart = pageEnd - num;
+                            for (var i = pageStart; i < pageEnd; i++) {
+                                result += '<li><div class = "list title">' + data[i].gName +
+                                    '</div>' + '<div class="list list1"><span class = "list11">型号：' + data[i].gModel + '</span><span class="list12">规格：' + data[i].gSpec + '</span></div><div class = "list list2"><span class = "list21">数量：' + data[i].gCount + '</span><span class="list22">状态：' + data[i].gState + '</span></div><div class = "list list3"><span class = "list31">用途：</span><span class = "list32">' + data[i].gUse + '</span></div></li>';
+                                if ((i + 1) >= data.length) {
+                                    // 锁定
+                                    me.lock();
+                                    // 无数据
+                                    me.noData();
+                                    break;
+                                }
+                            }
+                            // 这里可以延时加载
+                            setTimeout(function() {
+                                $('#list').append(result);
+                                // 每次数据加载完，必须重置
+                                me.resetload();
+                            }, 100)
+                        }
+                    }
+                })
+            }, 200)
+
+        },
+        // 定义搜索样式及本地搜索功能
+        searchFnc: function() {
+            $('#search').on('focus', function() {
+                $(this).css('text-align', 'left');
+            })
+            $('#search').on('blur', function() {
+                $(this).css('text-align', 'center');
+            })
+            $('#search').on('keyup', function() {
+                $('#list li').hide();
+                var str = $(this).val();
+                str = str.replace(/\s/, '');
+                var reg = eval('/' + str + '/g');
+                $('#list li').each(function(index, ele) {
+                    var str1 = $(ele).text();
+                    if (str1.search(reg) != -1) {
+                        $(ele).show();
+                    }
+                })
+            })
+        }
+    };
+
+    // 等待注入时间
+    setTimeout(function() {
+        var data1 = HostApp.getDetail();
+        window.data = JSON.parse(decodeURI(data1));
+        main.init();
+    }, 500);
+    </script>
+</body>
+
+</html>

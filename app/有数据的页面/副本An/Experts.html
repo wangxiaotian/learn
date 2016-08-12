@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>专家库</title>
+    <meta name="viewport" content="width=device-width,inintial-scale=1,user-scalable=no">
+    <script src = "scripts/zepto.js"></script>
+    <script src = "scripts/dropload.min.js"></script>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    body {
+        font-size: 14px;
+        background: #eee;
+    }
+    
+    header {
+        text-align: center;
+        background-color: #428bca;
+        color: #fff;
+        padding: 10px 0;
+        font-size: 20px;
+    }
+    
+    .search {
+        padding: 10px 5px;
+    }
+    
+    .search input {
+        border: 1px solid #aaa;
+        height: 30px;
+        width: 100%;
+    }
+    
+    img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .item {
+        border-bottom: 1px solid #ccc;
+        display: flex;
+        background: #fff;
+        margin-bottom: 10px;
+    }
+    
+    .item1 {
+        flex: 1;
+        padding: 10px;
+    }
+    
+    .item2 {
+        flex: 4;
+    }
+    
+    .item2a,
+    .item2b {
+        display: flex;
+    }
+    
+    .item2a {
+        padding: 10px 0 5px 0;
+    }
+    
+    .item2b {
+        padding: 5px 0 10px 0;
+    }
+    
+    .phone {
+        padding: 0;
+    }
+    
+    .name {
+        flex: 1;
+    }
+    
+    .field {
+        flex: 1;
+    }
+    
+    .job {
+        flex: 2;
+    }
+    
+    .unit {
+        flex: 1;
+    }
+    </style>
+    <script src="scripts/doT.js"></script>
+    <script src="scripts/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="search">
+        <input style="text-align:center" id="search" type="search" results="s" class="inp" placeholder="搜索" />
+    </div>
+    <div class="content">
+        <ul id="list"></ul>
+    </div>
+    <script>
+    (function() {
+        // 模拟数据
+        var data = {
+            "goodsList": [{
+                "expertName": "李明",
+                "expertGrade": "工程师",
+                "goodsPhone": "13390797553",
+                "expertArea": "酸污染",
+                "expertBelong": "世德催化剂公司",
+            }, {
+                "expertName": "万佳明",
+                "expertGrade": "高级工程师",
+                "goodsPhone": "13390797527",
+                "expertArea": "化工分析",
+                "expertBelong": "世德催化剂公司"
+            }, {
+                "expertName": "刘九华",
+                "expertGrade": "工程师",
+                "goodsPhone": "13490797527",
+                "expertArea": "锅炉",
+                "expertBelong": "发电厂"
+            }, {
+                "expertName": "杨志平",
+                "expertGrade": "高级工程师",
+                "goodsPhone": "13590797527",
+                "expertArea": "化工",
+                "expertBelong": "卤化物"
+            }, {
+                "expertName": "唐学军",
+                "expertGrade": "教授",
+                "goodsPhone": "13690797527",
+                "expertArea": "化工分析",
+                "expertBelong": "东南大学"
+            }, {
+                "expertName": "孙越",
+                "expertGrade": "系主任",
+                "goodsPhone": "13790797527",
+                "expertArea": "水污染控制",
+                "expertBelong": "水文系"
+            }]
+        };
+        // 定义main
+        var main = {
+            // 初始化
+            init: function() {
+                var self = this;
+                //self.sendData('http://www.jsywsz.com/WebCityCrisis/getREmgerCase.do',3,function(data){
+                //data = data;
+                //});
+                self.dropLoadFnc();
+                self.searchFnc();
+            },
+            // 定义发送数据
+            sendData: function(url, param, callback) {
+                HostApp.setDataInfo(url, param, callback);
+            },
+            // 定义滑动加载
+            dropLoadFnc: function() {
+                //下拉分条请求数据
+                var counter = 0;
+                //每页展示10条数据
+                var num = 10;
+                var pageStart = 0,
+                    pageEnd = 0;
+                $('.content').dropload({
+                    scrollArea: window,
+                    domDown: {
+                        domClass: 'dropload-down',
+                        domRefresh: '<div class = "dropload-refresh">上啦滑动加载</div>',
+                        domload: '<div class = "dropload-load"><span class = "loading"></span>加载中...</div>',
+                        domNoData: '<div class = "dropload-noData">没有更多内容</div>'
+                    },
+                    loadDownFn: function(me) {
+                        createDom(data);
+
+                        function createDom(data) {
+                            var result = '';
+                            counter++;
+                            pageEnd = num * counter;
+                            pageStart = pageEnd - num;
+                            for (var i = pageStart; i < pageEnd; i++) {
+                                result += '<li class="item"><div class = "item1"><img src = ""/></div><div class = "item2"><div class = "item2a" ><span class = "name">' + data.goodsList[i].expertName + '</span><span class="job">' + data.goodsList[i].expertGrade + '</span></div><span class = "phone">' + data.goodsList[i].goodsPhone + '</span><div class = "item2b"> <span class = "field">专业领域：' + data.goodsList[i].expertArea + '</span><span class="unit">工作单位：' + data.goodsList[i].expertBelong + '</span></div></div></div>';
+                                if ((i + 1) >= data.goodsList.length) {
+                                    // 锁定
+                                    me.lock();
+                                    // 无数据
+                                    me.noData();
+                                    break;
+                                }
+                            }
+                            // 这里可以延时加载
+                            setTimeout(function() {
+                                $('#list').append(result);
+                                // 每次数据加载完，必须重置
+                                me.resetload();
+                            }, 500)
+                        }
+                    }
+                })
+            },
+            // 定义搜索样式及本地搜索功能
+            searchFnc: function() {
+                $('#list').on('touchend', '#list li a', function() {
+                    alert('触摸事件');
+                });
+                $('#search').on('focus', function() {
+                    $(this).css('text-align', 'left');
+                })
+                $('#search').on('blur', function() {
+                    $(this).css('text-align', 'center');
+                })
+            }
+        };
+        // 初始化
+        main.init();
+    })()
+    </script>
+</body>
+
+</html>

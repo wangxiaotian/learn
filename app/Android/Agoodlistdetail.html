@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>应急物品详情页面</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <script src="doT.js"></script>
+    <script src="jquery-1.12.2.js"></script>
+    <style>
+    	*{
+	    	margin:0;
+	    	padding: 0;
+	    }
+		body{
+			font-size: 14px;
+			background: #eef;
+		}
+        header{
+			text-align: center;
+			background-color:#428bca;
+			color: #fff;
+			padding:10px 0;
+			font-size: 20px;
+		}
+		.search{
+			padding: 10px 5px;
+		}
+		.search input{
+			border: 1px solid #aaa;
+			height: 30px;
+			width:100%;
+		}
+		.underline{
+			width:100%;
+			border-bottom: 1px solid #aaa;
+			padding:20px 0 20px 40px;
+			background: url("images/图标.png") no-repeat 0px 15px;
+		}
+        .section{
+            background: #fff;
+
+            padding:10px 10px 20px 10px;
+        }
+        .section1{
+        	margin-top:5px;
+        	
+        }
+        .section1 table{
+        	padding-top: 10px;
+        	margin-left:35px;
+        }
+        .section1 table tr{
+        	width: 100%;
+        }
+        .section1 table tr td{
+        	padding:10px 5px;
+        }
+        .section2{
+        	margin-top:10px;
+        }
+        .section2 .yongtu{
+        	display: inline-block;
+        	padding: 10px 0 0 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h3>应急物资</h3>
+    </header>
+    <div class="search">
+    	<input type="text" class="inp" placeholder="搜索">
+    </div>
+    <div id="detail">
+        <script type="text/template" id="template_detail" charset="utf-8">
+            <div class="section section1">
+                <div class = "underline"<span class="title">{{=it.name}}|&nbsp;&nbsp;其他</span></div>
+                <table>
+                    <tr>
+                        <td>型号：{{=it.xinghao}}</td>
+                        <td>规格：{{=it.guige}}</td>
+                    </tr>
+                    <tr>
+                        <td>计量单位：{{=it.danwei}}</td>
+                        <td>数量：{{=it.shuliang}}</td>
+                    </tr>
+                    <tr>
+                        <td>当前状态：{{=it.zhuangtai}}</td>
+                        <td>是否可重复使用：{{=it.fuyong}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">最新操作人：{{=it.ren}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">最新操作时间：{{=it.shijian}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="section section2">
+                <div class = "underline"><span class="title">用途</span></div>
+                <span class="yongtu">{{=it.yongtu}}</span>
+            </div>
+        </script>
+    </div>
+    <script>
+      // doT.js
+// 2011-2014, Laura Doktorova, https://github.com/olado/doT
+// Licensed under the MIT license.
+    var template = document.getElementById('template_detail').innerHTML;
+    var Ojson = {
+        "name": "防刺背心",
+        "xinghao": "你猜",
+        "guige": "xl",
+        "danwei": "件",
+        "shuliang": 60,
+        "zhuangtai": "鬼知",
+        "fuyong": "是",
+        "ren": "管理员",
+        "shijian": "2015-07-09&nbsp;11:32:54",
+        "yongtu": "应急救援"
+    }
+    document.getElementById('detail').innerHTML = doT.template(template)(Ojson);
+    </script>
+</body>
+
+</html>
