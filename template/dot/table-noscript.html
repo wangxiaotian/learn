@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>没有script标签的模板</title>
+	<script src="js/doT.js"></script>
+    <script src="js/jquery.min.js"></script>
+</head>
+<body>
+	<h3>有些模板没有用到script标签，但是仍然可以渲染出来</h3>
+    <p>写table组件的时候遇到的问题，将模板放入一个单独的文件中，做成jQuery对象最后插入标签内</p>
+    <p><b>哇，真的可以啊,但是只能写作是字符串，不能转化为jQuery对象，这样写的好处是如果写在组件里边<br><br>
+    不会因为id的命名而与组件外的dom命名发生冲突</b></p>
+	<div id="example">
+		
+	</div>
+	<script>
+		$(function(){
+			var data = {
+				"name" : "张三"
+			}
+
+			var str = '<span>{{=it.name}}</span>';
+            var strhtml = $(str);
+            $('#example').html(doT.template(str)(data));
+		})
+	</script>
+</body>
+</html>
