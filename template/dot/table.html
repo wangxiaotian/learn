@@ -30,6 +30,11 @@
         哪些是可以抽出来的？
         <br> 1、td要抽出来，即td要以循环遍历的方法来写
     </p>
+    <h3>表格渲染，即dot.js的二级便遍历</h3>
+    <p>1.第一级循环，是要判断长度的，根据长度渲染出来第一层结构，即使没有第二层<br>
+        2.第二级循环，是要具体枚举出数据的值得，这时要用遍历对象的方法，遍历的对象可以从第一层循环数组的值取得，这个值无所谓是数组或者对象，都会被当做对象，数组也是特殊的对象
+        3.数据结构的设置，就按平常的来就行，即json对象里边的属性值是一个数组，其下边是分散的对象这种 
+    </p>
     <div id="table">
         <script id="template" type="text/template" charset="utf-8">
             <table class="table">
@@ -66,22 +71,81 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{~it:value}}
+                    {{~it:row}}
                     <tr>
-                        {{~value:item}}
-                        <td>
-                            {{=item}}
-                        </td>
-                        {{~}}
+                        {{for(var prop in row){ }}
+                        <td>{{=row[prop]}}</td>
+                        {{ } }}
                     </tr>
-                    {{~}
+                    {{~}}
                 </tbody>
             </table>
+        </script>
+        <!-- <script id="template2" type="text/template" charset="utf-8">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>工号</th>
+                        <th>姓名</th>
+                        <th>部门</th>
+                        <th>职务</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    模板里边是不认注释的
+                    {{for(var i = 0;l = it.length, i
+                     < l; i++){ }}
+                     
+                    <tr>
+                        {{for(var prop in it[i]){ }}
+                        <td>
+                            {{=it[i][prop]}}
+                        </td>
+                        {{ } }}
+                    </tr>
+                    {{ } }}
+                </tbody>
+            </table>
+        </script> -->
+    </div>
+    <div id="example">
+        <script id="template3" type="text/template" charset="utf-8">
+            {{~it.array:value}}
+            <div>{{=value}}!</div>
+            {{~}}
+        </script>
+    </div>
+    <div id="example2">
+        <script id="template4" type="text/template" charset="utf-8">
+            {{for(var prop in it){ }}
+            <div>KEY:{{=prop}}--VALUE:{{=it[prop]}}</div>
+            {{ } }}
         </script>
     </div>
     <script>
     $(function() {
         // 设计表格数据形式，只渲染表格体，先不渲染表头
+        // 数组循环示例
+        var data2 = {
+            "array": ["banana", "apple", "orange"]
+        }
+        var template3 = $('#template3').html();
+        $('#example').html(doT.template(template3)(data2));
+
+        // 对象循环示例
+        var data3 = {
+            "name": "jake",
+            "age": "31",
+            "interests": ["basketball", "hockey", "photography"],
+            "contact": {
+                "email": "jake@xyz.com",
+                "phone": "999999999"
+            }
+        }
+        var template4 = $('#template4').text();
+        $('#example2').html(doT.template(template4)(data3));
+
+        // 第一个table
         var data = {
             "status": 0,
             "data": [{
@@ -104,6 +168,10 @@
                 "role": "机械装配"
             }]
         }
+        var template = $('#template').html();
+        $('#table').html(doT.template(template)(data.data));
+
+        // 第二个table
         var data1 = {
             "status": 0,
             "data": [
@@ -127,10 +195,8 @@
                 ]
             ]
         }
-        var template = $('#template').html();
-        $('#table').html(doT.template(template)(data.data));
         var template2 = $('#template2').html();
-        $('#table2').html(doT.template(data1.data));
+        $('#table2').html(doT.template(template2)(data.data));
     })
     </script>
 </body>
