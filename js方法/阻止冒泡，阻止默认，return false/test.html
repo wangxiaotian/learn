@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test</title>
+</head>
+<body>
+	<div class="outer">
+		<div class="inner"><a id = "alink" href="https://www.baidu.com/index.php?tn=monline_3_dg" class="test">点点看</a></div>
+	</div>
+	<script>
+
+		window.onload = function(){
+			function getClass(a){
+				var oClass = document.getElementsByClassName(a)[0];
+				return oClass;
+			};
+			var oDiv1 = getClass('outer');
+			var oDiv2 = getClass('inner');
+			var oA = getClass('test');
+			oDiv1.onclick = function(){
+				alert('冒泡二级');
+			}
+			oDiv2.onclick = function(){
+				alert('冒泡一级');
+			}
+			oA.onclick = function(e){
+				console.log('故事的开头');
+				console.log('故事的结尾');
+				e.stopPropagation();
+				e.preventDefault();
+				alert(e.target.id);
+			}
+		}
+	</script>
+</body>
+</html>

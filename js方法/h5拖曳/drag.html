@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>drag</title>
+    <style>
+    html,body{
+    	width:100%;
+    	height:100%;
+    }
+    #div1,
+    #div2 {
+        float: left;
+        width: 100px;
+        height: 35px;
+        margin: 10px;
+        padding: 10px;
+        border: 1px solid #aaaaaa;
+    }
+    
+    img {
+        width: 100px;
+        height:100px;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="div1"><img id = "drag1" src="test.gif" alt="" draggable="true"></div>
+    <div id="div2"></div>
+    <script>
+    window.onload = function() {
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("Text", ev.target.id);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("Text");
+            ev.target.appendChild(document.getElementById(data));
+        }
+        var oDiv1 = document.getElementById('div1');
+        var oDiv2 = document.getElementById('div2');
+        var oImg = document.getElementsByTagName('img')[0];
+        var oBody = document.getElementsByTagName('body')[0];
+        oDiv1.ondrop = function(event) {
+            drop(event);
+        }
+        oDiv2.ondrop = function(event) {
+            drop(event);
+        }
+        oBody.ondrop = function(event){
+        	drop(event);
+        }
+        oDiv1.ondragover = function(event) {
+            allowDrop(event);
+        }
+        oDiv2.ondragover = function(event) {
+            allowDrop(event);
+        }
+        oBody.ondragover = function(event){
+        	allowDrop(event);
+        }
+        //	被拖动元素首先要设置其可被拖动属性为true
+        oImg.ondragstart = function(event) {
+        	drag(event);
+        }
+    }
+    </script>
+</body>
+
+</html>
