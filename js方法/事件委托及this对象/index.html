@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>事件委托及this对象</title>
+    <script src = "../jquery.min.js"></script>
+</head>
+
+<body>
+    <p>再用事件委托的时候，this对象是指向外层dom对象还是内层dom对象?<br>
+    用列表来测试的时候是可以的</p>
+    <div class="test1">
+        <ul id="test1">
+            <li>first</li>
+            <li>second</li>
+            <li>three</li>
+            <li>four</li>
+        </ul>
+    </div>
+    -----------------------------
+    <br>
+    <br>
+    事件委托
+    <div class="test2">
+    	<select name="" id="test2">
+    		<option value="">一</option>
+    		<option value="">二</option>
+    		<option value="">三</option>
+    		<option value="">四</option>
+    	</select>
+    </div>
+    <br>
+    没有事件委托
+    <p>这个东西和事件委托无关</p>
+    <br>
+    <div class="test3">
+    	<select name="" id="test3">
+    		<option value="">一</option>
+    		<option value="">二</option>
+    		<option value="">三</option>
+    		<option value="">四</option>
+    	</select>
+    </div>
+    <script>
+    $(function() {
+        $('.test1').on('click','li',function(){
+        	alert($(this).text());
+        })
+        $('.test2').on('change','#test2',function(){
+        	alert($(this).val());
+        })
+        // w3c上面用val方法是可以获取对应的值的，但是这里不行，难道是版本不同？？
+        $('#test3').change(function(){
+        	alert($(this).val());
+        })
+    })
+    </script>
+</body>
+
+</html>

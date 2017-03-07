@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>条件语句</title>
+	<script src="js/doT.js"></script>
+    <script src="js/jquery.min.js"></script>
+</head>
+<body>
+	<h3>条件语句</h3>
+	<script id = "template1" type = "text/template" charset = "utf-8">
+		{{?it.name}}
+        <div>Oh,I love your name,{{=it.name}}</div>
+        {{??!it.age === 0}}
+        <div>Guess nobody named you yet!</div>
+        {{??}}
+        You are {{=it.age}} and still dont have a name?
+        {{?}}
+	</script>
+	<p id = "test1"></p>
+	<script>
+		$(function(){
+			var data = {
+				"name" : "jake",
+				"age" : "31"
+			}
+			var template = $('#template1').html();
+			$('#test1').html(doT.template(template)(data));
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>less-1</title>
+	<script src = "../less.min.js"></script>
+	<script>less = { env: 'development'};</script>
+	<script src = "../less.min.js"></script>
+	<script>less.watch();</script>
+	<style type = "text/less">
+		@color:color;
+		.page .title{
+			@{color}:red;
+		}
+	</style>
+</head>
+<body>
+	<div class="page">
+		<div class="title">学习less</div>
+		<div class="body">蓬门不识绮罗香<p>蓬门不识绮罗香</p></div>
+		<div class="footer">为它人作嫁衣裳</div>
+	</div>
+</body>
+</html>
